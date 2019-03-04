@@ -1,0 +1,20 @@
+alias cls=clear
+
+if [ ! $(uname -s) = "Darwin" ]; then
+    alias pbcopy="xsel --clipboard --input"
+    alias pbpaste="xsel --clipboard --output"
+fi
+
+# workspace
+hash -d space=$HOME/space
+alias s='~space'
+
+# folder with tools
+hash -d tooling=$HOME/tooling
+alias t='~tooling'
+
+# random string
+alias rp='openssl rand -base64 35 | tr -d "=+/"'
+
+alias tmux="TERM=screen-256color-bce tmux"
+alias tmuxr="tmux source-file ~/.tmux.conf"

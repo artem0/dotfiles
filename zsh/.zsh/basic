@@ -1,0 +1,18 @@
+setopt autocd
+setopt menucomplete
+
+zstyle ':completion:*' menu select # select completions with arrow keys
+
+zstyle ':completion:*' group-name '' # group results by category
+
+zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+
+bindkey "\e\eOD" backward-word
+bindkey "\e\eOC" forward-word
+
+bindkey '^[[3~' delete-char
+bindkey '^[3;5~' delete-char
+
+# themes -> https://github.com/robbyrussell/oh-my-zsh/wiki/Themes fav: (lambda, evan, crunch, eastwood, af-magic, nicoulaj),
+# random will pick random theme
+ZSH_THEME=af-magic

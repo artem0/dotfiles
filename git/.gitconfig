@@ -1,0 +1,30 @@
+[user]
+	name = Artem Rukavytsia
+	email = artem.rukavitsya@gmail.com
+[push]
+	default = current
+[alias]
+	st = status
+	d = diff
+	cim = commit -m
+	ca = commit -a
+	cam = commit -a -m
+	p = push
+	l = log
+	a = add
+	pl = pull
+	co = checkout
+	f = fetch
+	r = rebase
+	rem = remote
+	b = branch
+	cism = commit -S -m
+	casm = commit -S -a -m
+	t = tag -s
+	su = submodule foreach git pull
+	G = grep
+	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
+[github]
+	user = artem0
+[cola]
+	spellcheck = false
