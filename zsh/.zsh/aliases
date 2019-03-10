@@ -4,6 +4,23 @@ alias cls=clear
 if [ ! $(uname -s) = "Darwin" ]; then
     alias pbcopy="xsel --clipboard --input"
     alias pbpaste="xsel --clipboard --output"
+
+    LINUX_DIST=$(awk -F= '/^NAME/{print $2}' /etc/os-release | tr -d '"')
+
+    # Aliases for Ubuntu
+    if [ "$LINUX_DIST" = "Ubuntu" ]; then
+        alias agi='_ apt-get install -y'
+        alias agr='_ apt-get remove -y'
+        alias aup='_ apt-get update; _ apt-get upgrade;'
+        alias acs='apt-cache search'
+        alias chromium='chromium-browser'
+    fi
+    # Aliases for Arch
+    if [ "$LINUX_DIST" = "Arch Linux" ]; then
+        alias y='yaourt'
+        alias ys='yaourt -S --noconfirm'
+        alias yr='yaourt -R --noconfirm'
+    fi
 fi
 
 # workspace
