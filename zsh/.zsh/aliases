@@ -18,3 +18,5 @@ alias rp='openssl rand -base64 35 | tr -d "=+/"'
 
 alias tmux="TERM=screen-256color-bce tmux"
 alias tmuxr="tmux source-file ~/.tmux.conf"
+
+alias kp="pwd | pbcopy"
