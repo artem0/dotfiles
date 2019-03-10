@@ -1,5 +1,6 @@
 alias cls=clear
 
+# Workaround for using pbcopy on Linux
 if [ ! $(uname -s) = "Darwin" ]; then
     alias pbcopy="xsel --clipboard --input"
     alias pbpaste="xsel --clipboard --output"
@@ -20,3 +21,5 @@ alias tmux="TERM=screen-256color-bce tmux"
 alias tmuxr="tmux source-file ~/.tmux.conf"
 
 alias kp="pwd | pbcopy"
+
+alias reload!='. ~/.zshrc'
