@@ -16,7 +16,7 @@ export PYTHONPATH=$SPARK_HOME/python
 
 export CONFLUENT_HOME=$HOME/tooling/confluent-4.0.0/
 
-#Hadoop
+# Hadoop
 export HADOOP_HOME=$HOME/tooling/hadoop-2.9.1
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export HADOOP_CONF_PATH=$HADOOP_HOME/etc/hadoop
