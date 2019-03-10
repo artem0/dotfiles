@@ -1,3 +1,11 @@
+" Install Pathogen plugin manager
+let pathogen_path = expand('~/.vim/autoload/pathogen.vim')
+if !filereadable(pathogen_path)
+    echo "Installing Pathogen"
+    silent !mkdir -p ~/.vim/autoload
+    silent !curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+endif
+
 execute pathogen#infect()
 call pathogen#helptags()
 
@@ -16,8 +24,7 @@ let g:NERDTreeMouseMode=3
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
-    echo "Installing Vim-plug..."
-    echo ""
+    echo "Installing Vim-plug"
     silent !mkdir -p ~/.vim/autoload
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let vim_plug_just_installed = 1
