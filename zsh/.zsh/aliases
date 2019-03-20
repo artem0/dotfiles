@@ -40,3 +40,5 @@ alias tmuxr="tmux source-file ~/.tmux.conf"
 alias kp="pwd | pbcopy"
 
 alias reload!='. ~/.zshrc'
+
+alias e="curl ident.me"
