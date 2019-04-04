@@ -24,8 +24,8 @@
 	su = submodule foreach git pull
 	G = grep
     squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
-    p = checkout HEAD^
-    n  = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
+    prev = checkout HEAD^
+    next  = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
     rs = reset --soft HEAD~1
     rh = reset --hard HEAD~1
 [github]
