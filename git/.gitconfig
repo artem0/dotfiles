@@ -23,8 +23,10 @@
 	t = tag -s
 	su = submodule foreach git pull
 	G = grep
-	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
+    squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
+    p = checkout HEAD^
+    n  = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
 [github]
 	user = artem0
 [cola]
-	spellcheck = false
+    spellcheck = false
