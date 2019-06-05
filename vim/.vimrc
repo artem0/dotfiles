@@ -424,3 +424,6 @@ augroup END
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+
+set clipboard=unnamedplus
+
