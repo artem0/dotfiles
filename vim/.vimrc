@@ -165,6 +165,10 @@ set ls=2
 
 " incremental search
 set incsearch
+
+" exit search highlighting
+nnoremap <C-L> :set hlsearch!<CR>
+
 " highlighted search results
 set hlsearch
 
