@@ -429,9 +429,10 @@ augroup END
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 
-set clipboard=unnamedplus
 
 nnoremap <C-A> 0
 nnoremap <C-E> $
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
+
+set clipboard=unnamed "OSX
