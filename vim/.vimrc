@@ -431,8 +431,9 @@ Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 
 
 nnoremap <C-A> 0
-nnoremap <C-E> $
+nnoremap <C-E> A
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
 
 set clipboard=unnamed "OSX
+set paste
