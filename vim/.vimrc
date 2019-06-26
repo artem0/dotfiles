@@ -464,3 +464,5 @@ endfunction
 
 map <C-a> :call Comment()<CR>
 map <C-b> :call Uncomment()<CR>
+
+let NERDTreeShowHidden=1
