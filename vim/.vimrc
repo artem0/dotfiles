@@ -428,7 +428,7 @@ augroup END
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-
+let NERDTreeShowHidden=1
 
 nnoremap <C-A> 0
 nnoremap <C-E> A
@@ -439,30 +439,7 @@ set clipboard=unnamed "OSX
 
 set spell spelllang=en
 
-function! Comment()
-  let ext = tolower(expand('%:e'))
-  if ext == 'rb' || ext == 'sh' || ext == 'py'
-    silent s/^/\#/
-  elseif ext == 'js'
-    silent s:^:\/\/:g
-  elseif ext == 'vim'
-    silent s:^:\":g
-  endif
-endfunction
-
-function! Uncomment()
-  let ext = tolower(expand('%:e'))
-  if ext == 'rb' || ext == 'sh' || ext == 'py'
-    silent s/^\#//
-  elseif ext == 'js'
-    silent s:^\/\/::g
-  elseif ext == 'vim'
-    silent s:^\"::g
-  endif
-endfunction
-
-
+" Function for comment/uncomment code
+source ~/.vim/vcomments.vim
 map <C-a> :call Comment()<CR>
 map <C-b> :call Uncomment()<CR>
-
-let NERDTreeShowHidden=1
