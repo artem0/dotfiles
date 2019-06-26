@@ -6,7 +6,7 @@ function! Comment()
 		silent s:^:\/\/:g
 	elseif ft == 'tex'
 		silent s:^:%:g
-	elseif ft == 'vim'
+	elseif ft == 'vim' || ft == "vimrc"
 		silent s:^:\":g
 	endif
 endfunction
@@ -19,7 +19,7 @@ function! Uncomment()
 		silent s:^\/\/::g
 	elseif ft == 'tex'
 		silent s:^%::g
-	elseif ft == 'vim'
+	elseif ft == 'vim' || ft == "vimrc"
 		silent s:^\"::g
 	endif
 endfunction
