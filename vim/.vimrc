@@ -436,4 +436,5 @@ inoremap <C-A> <Home>
 inoremap <C-E> <End>
 
 set clipboard=unnamed "OSX
-set paste
+
+set spell spelllang=en
