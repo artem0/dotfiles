@@ -439,7 +439,7 @@ set clipboard=unnamed "OSX
 
 set spell spelllang=en
 
-" Function for comment/uncomment code
+" Functions for comment/uncomment code
 source ~/.vim/vcomments.vim
-map <C-a> :call Comment()<CR>
-map <C-b> :call Uncomment()<CR>
+map gc :call Comment()<CR>
+map gC :call Uncomment()<CR>
