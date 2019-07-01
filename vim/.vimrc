@@ -444,3 +444,8 @@ autocmd FileType javascript  set spell  spelllang=en
 source ~/.vim/vcomments.vim
 map gc :call Comment()<CR>
 map gC :call Uncomment()<CR>
+
+"ignorecase - case insensitive search
+"smartcase - case sensitive if it contains an uppercase letter
+set ignorecase
+set smartcase
