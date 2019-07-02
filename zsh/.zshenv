@@ -33,3 +33,11 @@ export PATH="/usr/local/Cellar/openvpn/2.4.6/sbin:$PATH"
 
 # import Python libs
 export PATH=$HOME/Library/Python/2.7/bin/:$PATH
+
+# source if a file exists
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+# include NixOs
+include ~/.nix-profile/etc/profile.d/nix.sh
