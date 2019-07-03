@@ -39,5 +39,8 @@ include () {
     [[ -f "$1" ]] && source "$1"
 }
 
-# include NixOs
+# include NixOs on start up
 include ~/.nix-profile/etc/profile.d/nix.sh
+
+export PATH=$PATH:~/tooling/protoc-3.3.0-osx-x86_64/bin
+export PATH=$PATH:~/tooling/jvmtop-0.8.0
