@@ -14,7 +14,7 @@ export SPARK_HOME=$HOME/tooling/spark-2.3.2-bin-hadoop2.7
 export PATH="$SPARK_HOME/bin:$PATH"
 export PYTHONPATH=$SPARK_HOME/python
 
-export CONFLUENT_HOME=$HOME/tooling/confluent-4.0.0/
+export CONFLUENT_HOME=$HOME/tooling/confluent-5.3.0/
 
 # Hadoop
 export HADOOP_HOME=$HOME/tooling/hadoop-2.9.1
