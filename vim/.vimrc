@@ -452,3 +452,7 @@ set smartcase
 
 "Make possilbe navigation with Option+Left Arrow and Option+Right Arrow
 :map f w
+
+
+"Disable Vim bells sounds
+set belloff=all
