@@ -449,3 +449,6 @@ map gC :call Uncomment()<CR>
 "smartcase - case sensitive if it contains an uppercase letter
 set ignorecase
 set smartcase
+
+"Make possilbe navigation with Option+Left Arrow and Option+Right Arrow
+:map f w
