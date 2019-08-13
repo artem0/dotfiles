@@ -335,11 +335,11 @@ let g:syntastic_enable_signs = 0
 
 " All these mappings work only for python code:
 " Go to definition
-let g:jedi#goto_command = ',d'
+let g:jedi#goto_command ="<leader>d"
 " Find ocurrences
-let g:jedi#usages_command = ',o'
+let g:jedi#usages_command = "<leader>o"
 " Find assignments
-let g:jedi#goto_assignments_command = ',a'
+let g:jedi#goto_assignments_command = "<leader>a"
 " Go to definition in new tab
 nmap ,D :tab split<CR>:call jedi#goto()<CR>
 
