@@ -28,8 +28,8 @@ hash -d space=$HOME/space
 alias s='~space'
 
 # folder with tools
-hash -d tooling=$HOME/tooling
-alias t='~tooling'
+hash -d tooling=$HOME/tools
+alias t='~tools'
 
 # random string
 alias rp='openssl rand -base64 35 | tr -d "=+/"'

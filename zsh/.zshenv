@@ -3,6 +3,9 @@ export LANG=en_US.UTF-8
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# folder with tools
+export tools=$HOME/tools
+
 # load python autocomplete
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
@@ -10,14 +13,14 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 export WORKON_HOME=~/.virtualenvs
 [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 
-export SPARK_HOME=$HOME/tooling/spark-2.3.2-bin-hadoop2.7
+export SPARK_HOME=$tools/spark-2.3.2-bin-hadoop2.7
 export PATH="$SPARK_HOME/bin:$PATH"
 export PYTHONPATH=$SPARK_HOME/python
 
-export CONFLUENT_HOME=$HOME/tooling/confluent-5.3.0/
+export CONFLUENT_HOME=$tools/confluent-5.3.0/
 
 # Hadoop
-export HADOOP_HOME=$HOME/tooling/hadoop-2.9.1
+export HADOOP_HOME=$tools/hadoop-2.9.1
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export HADOOP_CONF_PATH=$HADOOP_HOME/etc/hadoop
 export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
@@ -42,5 +45,5 @@ include () {
 # include NixOs on start up
 include ~/.nix-profile/etc/profile.d/nix.sh
 
-export PATH=$PATH:~/tooling/protoc-3.3.0-osx-x86_64/bin
-export PATH=$PATH:~/tooling/jvmtop-0.8.0
+export PATH=$PATH:$tools/protoc-3.3.0-osx-x86_64/bin
+export PATH=$PATH:$tools/jvmtop-0.8.0
