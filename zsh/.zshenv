@@ -10,6 +10,7 @@ export tools=$HOME/tools
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # necessary for virtual environments setup
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
 export WORKON_HOME=~/.virtualenvs
 [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 
