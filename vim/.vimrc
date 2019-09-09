@@ -167,7 +167,7 @@ set ls=2
 set incsearch
 
 " exit search highlighting
-nnoremap <C-L> :set hlsearch!<CR>
+nnoremap <C-H> :set hlsearch!<CR>
 
 " highlighted search results
 set hlsearch
