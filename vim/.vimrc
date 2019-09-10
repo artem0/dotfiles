@@ -127,6 +127,9 @@ Plug 'vim-scripts/Wombat'
 " Yank history navigation
 Plug 'vim-scripts/YankRing.vim'
 
+" Multiple cursors
+Plug 'terryma/vim-multiple-cursors'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
