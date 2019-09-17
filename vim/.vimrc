@@ -466,3 +466,8 @@ set smartcase
 "Disable Vim bells sounds
 set belloff=all
 
+" fzf configs
+nnoremap <leader>e :Files<CR>
+nnoremap <leader>g :GFiles<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>l :Lines<CR>
