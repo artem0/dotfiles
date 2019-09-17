@@ -1,2 +1,6 @@
 
 /.idea/
+
+vim/.vim/autoload/
+vim/.vim/dirs/
+vim/.vim/plugged/
