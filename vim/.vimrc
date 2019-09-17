@@ -11,8 +11,6 @@ call pathogen#helptags()
 
 :set mouse=a
 
-let g:NERDTreeMouseMode=3 
-
 " Fisa-vim-config
 " http://fisadev.github.io/fisa-vim-config/
 " version: 8.3.1
@@ -51,6 +49,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'arielrossanigo/dir-configs-override.vim'
 " Better file browser
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+Plug  'tiagofumo/vim-nerdtree-syntax-highlight'
 " Code commenter
 Plug 'scrooloose/nerdcommenter'
 " Class/module browser
@@ -277,9 +277,18 @@ let g:tagbar_autofocus = 1
 map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
 nmap ,t :NERDTreeFind<CR>
-" don;t show these file types
+" don't show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+" enable mouse
+let g:NERDTreeMouseMode=3
 
+" make nerdtree prettier
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeShowHidden=1
+" nerdtree-syntax-highlight
+let g:NERDTreeFileExtensionHighlightFullName = 1
 
 " Tasklist ------------------------------
 
@@ -430,10 +439,6 @@ augroup Python
     autocmd!
         autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 augroup END
-
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeTabsToggle' }
-Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-let NERDTreeShowHidden=1
 
 nnoremap <C-A> 0
 nnoremap <C-E> A
