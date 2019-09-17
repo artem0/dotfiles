@@ -265,7 +265,8 @@ endif
 " Edit them as you wish.
 
 " Tagbar ----------------------------- 
-
+" Install Ctags in case of conflict with OSX:
+" https://github.com/universal-ctags/homebrew-universal-ctags
 " toggle tagbar display
 map <F4> :TagbarToggle<CR>
 " autofocus on tagbar open
