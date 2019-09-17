@@ -127,9 +127,6 @@ Plug 'vim-scripts/Wombat'
 " Yank history navigation
 Plug 'vim-scripts/YankRing.vim'
 
-" Multiple cursors
-Plug 'terryma/vim-multiple-cursors'
-
 " :PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug '/usr/local/opt/fzf'
@@ -463,11 +460,4 @@ set smartcase
 
 "Disable Vim bells sounds
 set belloff=all
-
-" Exit from multiple_cursors plugin in visual or insert mode
-" occasionally  it's difficlult to exit from the insert mode of this plugin,
-" prefer Visual Block to this plugin
-
-let g:multi_cursor_exit_from_visual_mode = 1
-let g:multi_cursor_exit_from_insert_modee = 1
 
