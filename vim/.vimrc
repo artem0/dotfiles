@@ -130,6 +130,11 @@ Plug 'vim-scripts/YankRing.vim'
 " Multiple cursors
 Plug 'terryma/vim-multiple-cursors'
 
+" :PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
