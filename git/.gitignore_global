@@ -1,0 +1,10 @@
+.idea/
+*.pyc
+_trial_temp
+_trial_temp*
+eggs/
+.class
+*.cache
+.DS_Store
+
+nohup.out

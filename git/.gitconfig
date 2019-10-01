@@ -5,12 +5,12 @@
 	default = current
 [alias]
 	d = diff
-	st = status
+	s = status
 	cim = commit -m
 	ca = commit -a
 	cam = commit -a -m
 	p = push
-	l = log
+        pub = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
 	a = add -A
 	pl = pull
 	co = checkout
@@ -28,7 +28,13 @@
 	next  = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
 	rs = reset --soft HEAD~1
 	rh = reset --hard HEAD~1
+        l = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [github]
 	user = artem0
 [cola]
 	spellcheck = false
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+[core]
+	excludesfile = ~/.gitignore_global
