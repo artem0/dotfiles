@@ -7,7 +7,7 @@
 	d = diff
 	s = status
 	cim = commit -m
-	ca = commit -a
+	ca = !git add -A && git commit
 	cam = commit -a -m
 	p = push
         pub = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
