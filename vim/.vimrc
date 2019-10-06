@@ -84,8 +84,6 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
 " Python autocompletion, go to definition.
 Plug 'davidhalter/jedi-vim'
-" Better autocompletion
-Plug 'Shougo/neocomplcache.vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -136,8 +134,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" <Tab> to do autocompletion
-Plug 'ervandew/supertab'
+" NeoComplete
+Plug 'Shougo/neocomplete.vim'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -299,27 +297,6 @@ let g:jedi#goto_assignments_command = "<leader>a"
 " Go to definition in new tab
 nmap ,D :tab split<CR>:call jedi#goto()<CR>
 
-" NeoComplCache ------------------------------
-
-" most of them not documented because I'm not sure how they work
-" (docs aren't good, had to do a lot of trial and error to make 
-" it play nice)
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_ignore_case = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_fuzzy_completion_start_length = 1
-let g:neocomplcache_auto_completion_start_length = 1
-let g:neocomplcache_manual_completion_start_length = 1
-let g:neocomplcache_min_keyword_length = 1
-let g:neocomplcache_min_syntax_length = 1
-" complete with workds from any opened file
-let g:neocomplcache_same_filetype_lists = {}
-let g:neocomplcache_same_filetype_lists._ = '_'
-
 " TabMan ------------------------------
 
 " mappings to toggle display, and to focus on it
@@ -389,8 +366,8 @@ inoremap <C-E> <End>
 
 set clipboard=unnamed "OSX
 
-autocmd FileType python set spell  spelllang=en
-autocmd FileType javascript  set spell  spelllang=en
+autocmd FileType python set spell spelllang=en omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set spell spelllang=en
 
 " Functions for comment/uncomment code
 source ~/.vim/vcomments.vim
@@ -426,4 +403,22 @@ function s:CompleteTags()
   inoremap <buffer> ><CR> ></<C-x><C-o><Esc>:startinsert!<CR><C-O>?</<CR><CR><Tab><CR><Up><C-O>$
 endfunction
 autocmd BufRead,BufNewFile *.html,*.js,*.xml call s:CompleteTags()
+
+" NeoComplete configs
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 1
+" Select first item
+let g:neocomplete#enable_auto_select = 1
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
