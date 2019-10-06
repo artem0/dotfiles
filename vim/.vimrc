@@ -136,6 +136,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" <Tab> to do autocompletion
+Plug 'ervandew/supertab'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
