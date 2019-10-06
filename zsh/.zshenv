@@ -38,13 +38,7 @@ export PATH="/usr/local/Cellar/openvpn/2.4.6/sbin:$PATH"
 # import Python libs
 export PATH=$HOME/Library/Python/2.7/bin/:$PATH
 
-# source if a file exists
-include () {
-    [[ -f "$1" ]] && source "$1"
-}
-
-# include NixOs on start up
-include ~/.nix-profile/etc/profile.d/nix.sh
-
 export PATH=$PATH:$tools/protoc-3.3.0-osx-x86_64/bin
 export PATH=$PATH:$tools/jvmtop-0.8.0
+
+export SDKMAN_DIR="$HOME/.sdkman"
