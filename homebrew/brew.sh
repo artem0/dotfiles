@@ -5,3 +5,4 @@ brew install fzf
 brew install tmux
 brew install tig
 brew install autojump
+brew install bat
