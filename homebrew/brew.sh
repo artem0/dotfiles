@@ -6,3 +6,4 @@ brew install tmux
 brew install tig
 brew install autojump
 brew install bat
+brew install git-secrets

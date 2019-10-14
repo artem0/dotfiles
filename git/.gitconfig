@@ -10,7 +10,7 @@
 	ca = !git add -A && git commit
 	cam = commit -a -m
 	p = push
-        pub = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
+	pub = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
 	a = add -A
 	pl = pull
 	co = checkout
@@ -28,13 +28,18 @@
 	next  = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
 	rs = reset --soft HEAD~1
 	rh = reset --hard HEAD~1
-        l = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	l = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [github]
 	user = artem0
 [cola]
 	spellcheck = false
 [pager]
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
+	diff = diff-so-fancy | less
+	show = diff-so-fancy | less
 [core]
 	excludesfile = ~/.gitignore_global
+[secrets]
+	providers = git secrets --aws-provider
+	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
+	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?

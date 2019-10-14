@@ -1,4 +1,4 @@
-plugins=(ssh-agent autojump fzf sdk)
+plugins=(ssh-agent autojump fzf sdk aws)
 
 source <(antibody init)
 antibody bundle < ~/.zsh/.zsh_plugins
