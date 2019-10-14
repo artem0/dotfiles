@@ -42,3 +42,6 @@ export PATH=$PATH:$tools/protoc-3.3.0-osx-x86_64/bin
 export PATH=$PATH:$tools/jvmtop-0.8.0
 
 export SDKMAN_DIR="$HOME/.sdkman"
+
+# Reduce delay time after pressing ESC before opening vim mode for editing a command
+export KEYTIMEOUT=1

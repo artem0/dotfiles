@@ -16,3 +16,8 @@ bindkey '^[3;5~' delete-char
 # themes -> https://github.com/robbyrussell/oh-my-zsh/wiki/Themes fav: (lambda, evan, crunch, eastwood, af-magic, nicoulaj),
 # "random" will pick random theme
 ZSH_THEME=af-magic
+
+# Use ESC to edit the current command line:
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\033' edit-command-line
