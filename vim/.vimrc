@@ -429,3 +429,7 @@ let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "Cursor after last character
 set ve+=onemore
+
+" Use the black hole register to really delete something:
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
