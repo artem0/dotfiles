@@ -8,3 +8,4 @@ brew install autojump
 brew install bat
 brew install git-secrets
 brew install jq
+brew install vifm
