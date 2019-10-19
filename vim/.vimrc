@@ -390,6 +390,7 @@ nnoremap <leader>e :Files<CR>
 nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>l :Lines<CR>
+nnoremap <leader>q :Ag<CR>
 
 " Source the vimrc file after saving it
 if has("autocmd")

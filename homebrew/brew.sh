@@ -9,3 +9,5 @@ brew install bat
 brew install git-secrets
 brew install jq
 brew install vifm
+# fzf :ag command
+brew install the_silver_searcher
