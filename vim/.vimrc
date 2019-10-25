@@ -89,12 +89,8 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
-" Git/mercurial/others diff icons on the side of the file lines
-Plug 'mhinz/vim-signify'
 " Automatically sort python imports
 Plug 'fisadev/vim-isort'
-" Drag visual blocks arround
-Plug 'fisadev/dragvisuals.vim'
 " Window chooser
 Plug 't9md/vim-choosewin'
 " Python and other languages code checker
@@ -139,6 +135,9 @@ Plug 'Shougo/neocomplete.vim'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
+
+" Map leader definition
+let mapleader=","
 
 " ============================================================================
 " Install plugins the first time vim runs
@@ -220,10 +219,6 @@ set completeopt-=preview
 " save as sudo
 ca w!! w !sudo tee "%"
 
-" simple recursive grep
-nmap ,r :Ack 
-nmap ,wr :Ack <cword><CR>
-
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
 	let &t_Co = 256
@@ -295,7 +290,7 @@ let g:jedi#usages_command = "<leader>o"
 " Find assignments
 let g:jedi#goto_assignments_command = "<leader>a"
 " Go to definition in new tab
-nmap ,D :tab split<CR>:call jedi#goto()<CR>
+nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
 
 " TabMan ------------------------------
 
@@ -307,32 +302,6 @@ let g:tabman_focus  = 'tf'
 
 " Fix to let ESC work as espected with Autoclose plugin
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
-
-" DragVisuals ------------------------------
-
-" mappings to move blocks in 4 directions
-vmap <expr> <S-M-LEFT> DVB_Drag('left')
-vmap <expr> <S-M-RIGHT> DVB_Drag('right')
-vmap <expr> <S-M-DOWN> DVB_Drag('down')
-vmap <expr> <S-M-UP> DVB_Drag('up')
-" mapping to duplicate block
-vmap <expr> D DVB_Duplicate()
-
-" Signify ------------------------------
-
-" this first setting decides in which order try to guess your current vcs
-" UPDATE it to reflect your preferences, it will speed up opening files
-let g:signify_vcs_list = [ 'git', 'hg' ]
-" mappings to jump to changed blocks
-nmap <leader>sn <plug>(signify-next-hunk)
-nmap <leader>sp <plug>(signify-prev-hunk)
-" nicer colors
-highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
-highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
-highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
-highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " Window Chooser ------------------------------
 
@@ -346,9 +315,6 @@ let g:choosewin_overlay_enable = 1
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#whitespace#enabled = 0
-
-
-let mapleader=","
 
 " run from the insert mode
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
@@ -446,3 +412,13 @@ xnoremap <leader>d "_d
 " Backspace in the visual mode for deleting
 vmap <bs> "_d
 imap <bs> "_d
+
+" Highlight the current line
+set cursorline
+hi cursorline cterm=none term=none
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+highlight CursorLine guibg=#303000 ctermbg=234
+
+highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
+hi CursorLineNr term=bold ctermfg=Blue gui=bold guifg=Yellow
