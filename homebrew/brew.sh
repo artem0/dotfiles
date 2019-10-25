@@ -11,3 +11,5 @@ brew install jq
 brew install vifm
 # fzf :ag command
 brew install the_silver_searcher
+# https://github.com/tmuxinator/tmuxinator
+brew install tmuxinator
