@@ -289,7 +289,7 @@ map <F2> :TaskList<CR>
 
 " All these mappings work only for python code:
 " Go to definition
-let g:jedi#goto_command ="<leader>d"
+let g:jedi#goto_command ="<leader>m"
 " Find ocurrences
 let g:jedi#usages_command = "<leader>o"
 " Find assignments
@@ -359,10 +359,19 @@ augroup Python
         autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 augroup END
 
-nnoremap <C-A> 0
-nnoremap <C-E> A
+" Remapping vim beginnin/end of the line keys
+
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
+
+xnoremap <C-A> <Home>
+xnoremap <C-E> <End>
+
+nnoremap <C-A> 0
+nnoremap <C-E> $
+
+"nnoremap 0 $
+"nnoremap 9 0
 
 set clipboard=unnamed "OSX
 
@@ -431,8 +440,9 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 set ve+=onemore
 
 " Use the black hole register to really delete something:
-nnoremap -d "_d
-xnoremap -d "_d
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
 
 " Backspace in the visual mode for deleting
-vmap <bs> x
+vmap <bs> "_d
+imap <bs> "_d
