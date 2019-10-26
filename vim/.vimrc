@@ -133,6 +133,14 @@ Plug 'airblade/vim-gitgutter'
 " NeoComplete
 Plug 'Shougo/neocomplete.vim'
 
+" Color schemas
+Plug 'arcticicestudio/nord-vim'
+Plug 'liuchengxu/space-vim-dark'
+Plug 'whatyouhide/vim-gotham'
+Plug 'keith/parsec.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
@@ -422,3 +430,10 @@ highlight CursorLine guibg=#303000 ctermbg=234
 
 highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 hi CursorLineNr term=bold ctermfg=Blue gui=bold guifg=Yellow
+
+" Wildmenu
+set wildmenu
+set wildmode=full:full
+
+"colorscheme gruvbox
+
