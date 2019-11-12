@@ -1,6 +1,9 @@
 setopt autocd
 setopt menucomplete
 
+# Avoid duplicate entry when fzf-ing shell history
+setopt HIST_IGNORE_ALL_DUPS
+
 zstyle ':completion:*' menu select # select completions with arrow keys
 
 zstyle ':completion:*' group-name '' # group results by category

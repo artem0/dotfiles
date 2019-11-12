@@ -37,6 +37,7 @@ export PATH="/usr/local/Cellar/openvpn/2.4.6/sbin:$PATH"
 
 # import Python libs
 export PATH=$HOME/Library/Python/2.7/bin/:$PATH
+export PATH=$HOME/Library/Python/3.7/bin/:$PATH
 
 export PATH=$PATH:$tools/protoc-3.3.0-osx-x86_64/bin
 export PATH=$PATH:$tools/jvmtop-0.8.0
