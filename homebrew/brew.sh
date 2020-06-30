@@ -13,3 +13,4 @@ brew install vifm
 brew install the_silver_searcher
 # https://github.com/tmuxinator/tmuxinator
 brew install tmuxinator
+brew install shellcheck

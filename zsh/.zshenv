@@ -14,7 +14,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
 export WORKON_HOME=~/.virtualenvs
 [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 
-export SPARK_HOME=$tools/spark-2.3.2-bin-hadoop2.7
+export SPARK_HOME=$tools/spark-2.4.4-bin-hadoop2.7/
 export PATH="$SPARK_HOME/bin:$PATH"
 export PYTHONPATH=$SPARK_HOME/python
 
