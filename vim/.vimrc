@@ -447,3 +447,9 @@ set wildmode=full:full
 
 "colorscheme gruvbox
 
+" Enable NERDTree resizing in tmux
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
