@@ -54,15 +54,13 @@ Plug  'tiagofumo/vim-nerdtree-syntax-highlight'
 " Code commenter
 Plug 'scrooloose/nerdcommenter'
 " Class/module browser
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 " Code and files fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
 " Extension to ctrlp, for fuzzy command finder
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 " Zen coding
 Plug 'mattn/emmet-vim'
-" Git integration
-Plug 'motemen/git-vim'
 " Tab list panel
 Plug 'kien/tabman.vim'
 " Airline
@@ -94,7 +92,7 @@ Plug 'fisadev/vim-isort'
 " Window chooser
 Plug 't9md/vim-choosewin'
 " Python and other languages code checker
-Plug 'scrooloose/syntastic'
+Plug'dense-analysis/ale'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
 " Ack code search (requires ack installed in the system)
@@ -127,7 +125,6 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 " Git wrappers
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " NeoComplete
