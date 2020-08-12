@@ -138,6 +138,9 @@ Plug 'keith/parsec.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 
+
+Plug 'easymotion/vim-easymotion'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
@@ -453,3 +456,6 @@ end
 
 " Enable FZF hidden files
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+
+" Make navigation great again :)
+set relativenumber
