@@ -1,1 +1,10 @@
+" Selected color scheme
 colorscheme iceberg
+
+" Default viewer, bat is slow, so it's disabled
+" fileviewer *[^/] env -uCOLORTERM bat --color always --wrap never --pager never %c --number
+" fileviewer *.py,*.sh,*.java,*.scala env -uCOLORTERM bat --color always --wrap never --pager never %c --number
+
+" Pictures
+filetype *.bmp,*.jpg,*.jpeg,*.png,*.pdf,*.gif open -a Preview %f &
+
