@@ -15,4 +15,5 @@ brew install the_silver_searcher
 brew install tmuxinator
 brew install shellcheck
 brew install macvim # jedi doesn't work without it ¯\_(ツ)_/¯
-
+brew install --cask iterm2
+brew install --cask dozer

@@ -1,6 +1,10 @@
+# prevent apps from staying in dock
+defaults write com.apple.dock show-recents -bool no
+defaults write com.apple.dock recent-apps -array # intentionally empty
+
 # iTerm2 – scroll less output with mouse
 defaults write com.googlecode.iterm2 AlternateMouseScroll -bool true
 
-# To adjust the speed of the animation of the hotkey window's appearance and disappearance
+# Iterm2 -  adjust the speed of the animation of the hotkey window's appearance and disappearance
 defaults write com.googlecode.iterm2 HotkeyTermAnimationDuration -float 0.01
 
