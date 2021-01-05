@@ -138,7 +138,8 @@ Plug 'keith/parsec.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 
-
+" <Leader><Leader>w - to trigger the word motion
+" <Leader><Leader>so - looking for an 'o'
 Plug 'easymotion/vim-easymotion'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -430,6 +431,9 @@ xnoremap <leader>d "_d
 " Backspace in the visual mode for deleting
 vmap <bs> "_d
 imap <bs> "_d
+
+" replace currently selected text with default register without yanking it
+vnoremap <leader>p "_dP
 
 " Highlight the current line
 set cursorline
