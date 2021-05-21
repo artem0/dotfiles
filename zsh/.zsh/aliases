@@ -32,7 +32,8 @@ hash -d tooling=$HOME/tools
 alias t='~tools'
 
 # random string
-alias rp='openssl rand -base64 35 | tr -d "=+/"'
+alias rs='openssl rand -base64 35 | tr -d "=+/"'
+alias rp='pwgen -Bsy 32 1'
 
 alias tmux="TERM=screen-256color-bce tmux"
 alias tmuxr="tmux source-file ~/.tmux.conf"
@@ -61,3 +62,4 @@ alias dkcpdown="docker-compose down"
 alias dkcpstart="docker-compose start"
 alias dkcpstop="docker-compose stop"
 
+alias al='unset AWS_VAULT && aws-vault exec artem'

@@ -17,3 +17,6 @@ brew install shellcheck
 brew install macvim # jedi doesn't work without it ¯\_(ツ)_/¯
 brew install --cask iterm2
 brew install --cask dozer
+brew install --cask aws-vault
+brew install pwgen
+
