@@ -21,3 +21,8 @@ function extract () {
     echo "'$1' is not a valid file"
   fi
 }
+
+function alr {
+export AWS_ACCESS_KEY_ID=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".AccessKeyID" | xargs)  &&
+export AWS_SECRET_ACCESS_KEY=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".SecretAccessKey" | xargs)
+}
