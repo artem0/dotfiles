@@ -19,4 +19,4 @@ brew install --cask iterm2
 brew install --cask dozer
 brew install --cask aws-vault
 brew install pwgen
-
+brew install gron
