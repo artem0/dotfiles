@@ -138,7 +138,9 @@ Plug 'keith/parsec.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 
-" <Leader><Leader>w - to trigger the word motion
+" <Leader><Leader>w | b - to trigger the word motion | backwards
+" <Leader><Leader>e | ge - to trigger the end of words | backwords
+" <Leader><Leader>j | k - to trigger the lines below | backwards
 " <Leader><Leader>so - looking for an 'o'
 Plug 'easymotion/vim-easymotion'
 
@@ -461,5 +463,3 @@ end
 " Enable FZF hidden files
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
-" Make navigation great again :)
-set relativenumber
