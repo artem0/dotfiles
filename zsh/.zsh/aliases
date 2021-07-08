@@ -62,4 +62,4 @@ alias dkcpdown="docker-compose down"
 alias dkcpstart="docker-compose start"
 alias dkcpstop="docker-compose stop"
 
-alias al='unset AWS_VAULT && aws-vault exec artem'
+alias als='unset AWS_VAULT && aws-vault exec artem'

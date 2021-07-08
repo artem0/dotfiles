@@ -20,3 +20,5 @@ brew install --cask dozer
 brew install --cask aws-vault
 brew install pwgen
 brew install gron
+brew install gh
+

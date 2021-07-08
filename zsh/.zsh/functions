@@ -22,9 +22,9 @@ function extract () {
   fi
 }
 
-function alr {
-unset AWS_SECURITY_TOKEN
-unset AWS_SESSION_TOKEN
-export AWS_ACCESS_KEY_ID=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".AccessKeyID" | xargs)  &&
-export AWS_SECRET_ACCESS_KEY=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".SecretAccessKey" | xargs)
+function alp {
+    unset AWS_SECURITY_TOKEN
+    unset AWS_SESSION_TOKEN
+    export AWS_ACCESS_KEY_ID=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".AccessKeyID" | xargs)  &&
+    export AWS_SECRET_ACCESS_KEY=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".SecretAccessKey" | xargs)
 }
