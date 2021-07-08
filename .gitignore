@@ -4,3 +4,7 @@
 vim/.vim/autoload/
 vim/.vim/dirs/
 vim/.vim/plugged/
+
+vifm/.vifm/scripts/
+vifm/.vifm/vifm-help.txt
+vifm/.vifm/vifminfo
