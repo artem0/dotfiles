@@ -9,7 +9,7 @@ brew install bat
 brew install git-secrets
 brew install jq
 brew install vifm
-# fzf :ag command
+# fzf :ag command & ag cli
 brew install the_silver_searcher
 # https://github.com/tmuxinator/tmuxinator
 brew install tmuxinator
@@ -21,4 +21,6 @@ brew install --cask aws-vault
 brew install pwgen
 brew install gron
 brew install gh
+# syslog navigator
+brew install lnav
 

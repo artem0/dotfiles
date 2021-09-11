@@ -22,7 +22,7 @@ function extract () {
   fi
 }
 
-function alp {
+function aws_login {
     unset AWS_SECURITY_TOKEN
     unset AWS_SESSION_TOKEN
     export AWS_ACCESS_KEY_ID=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".AccessKeyID" | xargs)  &&
