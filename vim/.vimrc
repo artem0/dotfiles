@@ -127,9 +127,6 @@ Plug 'junegunn/fzf.vim'
 " Git wrappers
 Plug 'airblade/vim-gitgutter'
 
-" NeoComplete
-Plug 'Shougo/neocomplete.vim'
-
 " Color schemas
 Plug 'arcticicestudio/nord-vim'
 Plug 'liuchengxu/space-vim-dark'
@@ -391,33 +388,9 @@ function s:CompleteTags()
 endfunction
 autocmd BufRead,BufNewFile *.html,*.js,*.xml call s:CompleteTags()
 
-" NeoComplete configs
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 1
-" Select first item
-let g:neocomplete#enable_auto_select = 1
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" TODO fix omni completion - workaaround from here  https://github.com/Shougo/neocomplete.vim/issues/302#issuecomment-59906862
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 "Cursor settings
 let &t_SI.="\e[5 q" "SI = INSERT mode
