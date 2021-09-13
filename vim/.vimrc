@@ -446,3 +446,14 @@ command! -bang -nargs=* Ag
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0
   \ )
+
+function! ClearRegisters()
+    let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-="*+'
+    let i=0
+    while (i<strlen(regs))
+        exec 'let @'.regs[i].'=""'
+        let i=i+1
+    endwhile
+endfunction
+
+command! ClearRegisters call ClearRegisters()
