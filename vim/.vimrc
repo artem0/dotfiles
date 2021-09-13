@@ -290,6 +290,8 @@ map <F2> :TaskList<CR>
 
 " Jedi-vim ------------------------------
 
+" jedi is hanging w\o this line and heavily loads CPU
+let g:jedi#force_py_version = 3
 " All these mappings work only for python code:
 " Go to definition
 let g:jedi#goto_command ="<leader>m"
