@@ -8,3 +8,9 @@ colorscheme iceberg
 " Pictures
 filetype *.bmp,*.jpg,*.jpeg,*.png,*.pdf,*.gif open -a Preview %f &
 
+" Show hidden files
+set dotfiles
+
+" yank current directory path into the clipboard on macOS
+" nnoremap yd :!echo -n %d | pbcopy %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+
