@@ -53,12 +53,6 @@ Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug  'tiagofumo/vim-nerdtree-syntax-highlight'
 " Code commenter
 Plug 'scrooloose/nerdcommenter'
-" Class/module browser
-"Plug 'majutsushi/tagbar'
-" Code and files fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
-" Extension to ctrlp, for fuzzy command finder
-Plug 'fisadev/vim-ctrlp-cmdpalette'
 " Zen coding
 Plug 'mattn/emmet-vim'
 " Tab list panel
@@ -251,15 +245,6 @@ set undodir=/tmp//
 
 " ============================================================================
 " Plugins settings and mappings
-" Edit them as you wish.
-
-" Tagbar ----------------------------- 
-" Install Ctags in case of conflict with OSX:
-" https://github.com/universal-ctags/homebrew-universal-ctags
-" toggle tagbar display
-map <F4> :TagbarToggle<CR>
-" autofocus on tagbar open
-let g:tagbar_autofocus = 1
 
 " NERDTree ----------------------------- 
 
