@@ -216,9 +216,6 @@ imap <M-Left> <ESC><c-w>h
 imap <M-Up> <ESC><c-w>k
 imap <M-Down> <ESC><c-w>j
 
-" old autocomplete keyboard shortcut
-imap <C-J> <C-X><C-O>
-
 " Comment this line to enable autocompletion preview window
 " (displays documentation related to the selected completion option)
 " Disabled by default because preview makes the window flicker
@@ -457,3 +454,8 @@ function! ClearRegisters()
 endfunction
 
 command! ClearRegisters call ClearRegisters()
+
+" quote/unquote words
+nnoremap <Leader>" ciw""<Esc>P
+nnoremap <Leader>' ciw''<Esc>P
+nnoremap <Leader>"d daW"=substitute(@@,"'\\\|\"","","g")<CR>P
