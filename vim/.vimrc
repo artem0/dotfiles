@@ -51,8 +51,6 @@ Plug 'arielrossanigo/dir-configs-override.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug  'tiagofumo/vim-nerdtree-syntax-highlight'
-" Code commenter
-Plug 'scrooloose/nerdcommenter'
 " Zen coding
 Plug 'mattn/emmet-vim'
 " Tab list panel
@@ -385,6 +383,9 @@ set ve+=onemore
 " Use the black hole register to really delete something:
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
+
+nnoremap <leader>c "_c
+xnoremap <leader>c "_c
 
 " Backspace in the visual mode for deleting
 vmap <bs> "_d
