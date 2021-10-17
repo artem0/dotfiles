@@ -38,3 +38,8 @@ yes | ~/.fzf/install
 cd $DOTFILES_FOLDER || exit
 stow vim -t $HOME
 pretty_print "VIMRC is applied"
+
+sudo snap install lnav
+sudo apt install net-tools
+pretty_print "Installed lnav and netstat"
+pretty_print "Done!"
