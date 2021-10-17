@@ -114,8 +114,7 @@ Plug 'vim-scripts/Wombat'
 Plug 'vim-scripts/YankRing.vim'
 
 " :PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Git wrappers

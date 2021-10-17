@@ -9,10 +9,11 @@ DOTFILES_URL=https://github.com/artem0/dotfiles.git
 
 pretty_print "Installing zsh and dependencies"
 yes | sudo apt install zsh
-yes Y | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+yes | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 yes | sudo apt-get install stow
 yes | curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 yes | sudo apt-get install fzf
+yes | sudo apt-get install silversearcher-ag
 yes | sudo apt install autojump
 pretty_print "Necessary packages are installed, applying dotflies"
 rm ~/.zshrc
@@ -26,7 +27,14 @@ else
     pretty_print "Pulling from dotfiles repo"
 fi
 
-cd "$DOTFILES_FOLDER/zsh_ubuntu" || exit
+cd "$DOTFILES_FOLDER/ubuntu_setup" || exit
 stow zsh -t $HOME
 chsh -s "$(which zsh)"
-pretty_print "Done"
+pretty_print "ZSH is installed"
+
+# installing fzf manually for vim - wacky w\o the setup below
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+yes | ~/.fzf/install
+cd $DOTFILES_FOLDER || exit
+stow vim -t $HOME
+pretty_print "VIMRC is applied"
