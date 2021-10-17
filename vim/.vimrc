@@ -444,3 +444,6 @@ command! ClearRegisters call ClearRegisters()
 nnoremap <Leader>" ciw""<Esc>P
 nnoremap <Leader>' ciw''<Esc>P
 nnoremap <Leader>"d daW"=substitute(@@,"'\\\|\"","","g")<CR>P
+
+let g:snipMate = { 'snippet_version' : 1 }
+
