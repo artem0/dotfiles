@@ -33,7 +33,7 @@ if [ $(uname -s) = "Darwin" ]; then
     export PATH=$JAVA_HOME/bin:$PATH
 fi
 
-export PATH="/usr/local/Cellar/openvpn/2.4.6/sbin:$PATH"
+export PATH="/usr/local/Cellar/openvpn/2.4.9/sbin:$PATH"
 
 # import Python libs
 export PATH=$HOME/Library/Python/2.7/bin/:$PATH
