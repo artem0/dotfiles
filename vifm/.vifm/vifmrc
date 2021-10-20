@@ -13,4 +13,4 @@ set dotfiles
 
 " yank current directory path into the clipboard on macOS
 " nnoremap yd :!echo -n %d | pbcopy %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
-
+set ignorecase
