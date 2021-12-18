@@ -101,9 +101,6 @@ endif
 " Plug 'myusuf3/numbers.vim'
 
 " Plugins from vim-scripts repos:
-
-" Search results counter
-Plug 'vim-scripts/IndexedSearch'
 " XML/HTML tags navigation
 Plug 'vim-scripts/matchit.zip'
 " Gvim colorscheme
@@ -115,7 +112,7 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" Git wrappers
+" Git wrapper, jump from one hunk to the next in the current buffer: ]c and [c
 Plug 'airblade/vim-gitgutter'
 
 " Color schemas
@@ -131,6 +128,8 @@ Plug 'morhetz/gruvbox'
 " <Leader><Leader>j | k - to trigger the lines below | backwards
 " <Leader><Leader>so - looking for an 'o'
 Plug 'easymotion/vim-easymotion'
+
+Plug 'haya14busa/incsearch.vim'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -170,15 +169,6 @@ autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " always show status bar
 set ls=2
-
-" incremental search
-set incsearch
-
-" exit search highlighting
-nnoremap <C-H> :set hlsearch!<CR>
-
-" highlighted search results
-set hlsearch
 
 " syntax highlight on
 syntax on
@@ -338,11 +328,6 @@ source ~/.vim/vcomments.vim
 map gc :call Comment()<CR>
 map gC :call Uncomment()<CR>
 
-"ignorecase - case insensitive search
-"smartcase - case sensitive if it contains an uppercase letter
-set ignorecase
-set smartcase
-
 "Make possilbe navigation with Option+Left Arrow and Option+Right Arrow
 :map f w
 
@@ -447,7 +432,7 @@ nnoremap <Leader>"d daW"=substitute(@@,"'\\\|\"","","g")<CR>P
 
 let g:snipMate = { 'snippet_version' : 1 }
 
-" Easymotion features in version 3.0
+" Easymotion  3.0 ------------------------------
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
@@ -463,7 +448,23 @@ nmap <Leader>l <Plug>(easymotion-overwin-line)
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
-" Navigating in Vim's Command Mode
+" Incsearch  ------------------------------
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+"ignorecase - case insensitive search
+"smartcase - case sensitive if it contains an uppercase letter
+set ignorecase
+set smartcase
+
+" This feature turns 'hlsearch' off automatically after searching-related motions
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+
+" Navigating in command mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
