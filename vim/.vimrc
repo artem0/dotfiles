@@ -353,7 +353,7 @@ set belloff=all
 nnoremap <leader>e :Files<CR>
 nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>l :Lines<CR>
+nnoremap <leader>L :Lines<CR>
 nnoremap <leader>q :Ag<CR>
 
 " Source the vimrc file after saving it
@@ -447,3 +447,18 @@ nnoremap <Leader>"d daW"=substitute(@@,"'\\\|\"","","g")<CR>P
 
 let g:snipMate = { 'snippet_version' : 1 }
 
+" Easymotion features in version 3.0
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
