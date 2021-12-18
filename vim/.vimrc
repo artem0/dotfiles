@@ -462,3 +462,8 @@ nmap <Leader>l <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Navigating in Vim's Command Mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
