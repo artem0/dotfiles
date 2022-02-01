@@ -26,3 +26,4 @@ brew install lnav
 # enhanced  scala-repl
 brew install ammonite-repl
 brew install pypy3
+brew install ripgrep
