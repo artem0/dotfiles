@@ -14,10 +14,6 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export WORKON_HOME=~/.virtualenvs
 [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 
-export SPARK_HOME=$tools/spark-2.4.4-bin-hadoop2.7/
-export PATH="$SPARK_HOME/bin:$PATH"
-export PYTHONPATH=$SPARK_HOME/python
-
 export CONFLUENT_HOME=$tools/confluent-5.3.0/
 
 # Hadoop
@@ -33,7 +29,7 @@ if [ $(uname -s) = "Darwin" ]; then
     export PATH=$JAVA_HOME/bin:$PATH
 fi
 
-export PATH="/usr/local/Cellar/openvpn/2.4.9/sbin:$PATH"
+export PATH="/usr/local/Cellar/openvpn/$(ls /usr/local/Cellar/openvpn | sort)/sbin:$PATH"
 
 # import Python libs
 export PATH=$HOME/Library/Python/2.7/bin/:$PATH
@@ -51,3 +47,8 @@ bindkey '\033' edit-command-line
 
 # Reduce delay time after pressing ESC before opening vim mode for editing a command
 export KEYTIMEOUT=1
+
+export NVM_DIR="$HOME/.nvm"                                                                                                                                                          
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+

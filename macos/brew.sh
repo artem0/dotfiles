@@ -23,4 +23,6 @@ brew install gron
 brew install gh
 # syslog navigator
 brew install lnav
-
+# enhanced  scala-repl
+brew install ammonite-repl
+brew install pypy3

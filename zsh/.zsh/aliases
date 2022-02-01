@@ -40,26 +40,16 @@ alias tmuxr="tmux source-file ~/.tmux.conf"
 
 alias v="bat"
 alias c="cd"
-alias kp="pwd | pbcopy"
 
-alias reload!='. ~/.zshrc'
+alias reload='. ~/.zshrc'
 
 alias e="curl ident.me"
 
 alias bp="python2.7 -m bpython"
-alias bp3="python3 -m bpython"
-alias bpp="pypy -m bpython"
-alias pyfind='find . -name "*.py"'
-alias scfind='find . -name "*.scala"'
-alias pygrep='grep -r --color --include="*.py"'
+alias bps="PYSPARK_DRIVER_PYTHON=bpython pyspark" # $HOME/Library/Python/2.7/bin/bpython for 2.7
+alias jupyter_pyspark="PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark"
 
-alias dkps="docker ps"
-alias dkst="docker stats"
-alias dkpsa="docker ps -a"
-alias dkimgs="docker images"
-alias dkcpup="docker-compose up -d"
-alias dkcpdown="docker-compose down"
-alias dkcpstart="docker-compose start"
-alias dkcpstop="docker-compose stop"
+alias pyfind='find . -name "*.py"'
+alias pygrep='grep -r --color --include="*.py"'
 
 alias aws_login_session='unset AWS_VAULT && aws-vault exec artem'
