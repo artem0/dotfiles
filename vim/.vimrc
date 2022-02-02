@@ -1,4 +1,4 @@
-" Install Pathogen plugin manager
+" Install Pathogen plugin manage
 let pathogen_path = expand('~/.vim/autoload/pathogen.vim')
 if !filereadable(pathogen_path)
     echo "Installing Pathogen"
@@ -318,8 +318,7 @@ xnoremap <C-E> <End>
 nnoremap <C-A> 0
 nnoremap <C-E> $
 
-"nnoremap 0 $
-"nnoremap 9 0
+nnoremap 9 $
 
 set clipboard=unnamed "OSX
 
