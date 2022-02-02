@@ -295,6 +295,9 @@ let g:airline_powerline_fonts = 0
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#whitespace#enabled = 0
 
+let g:airline_section_z = '%l:%v %p%% %L'
+let g:airline_section_y = '%{&fileencoding?&fileencoding:&encoding}'
+
 " run from the insert mode
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 
