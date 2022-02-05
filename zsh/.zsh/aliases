@@ -51,5 +51,6 @@ alias jupyter_pyspark="PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=
 
 alias pyfind='find . -name "*.py"'
 alias pygrep='grep -r --color --include="*.py"'
+alias jobj="/usr/local/Cellar/jo/$(ls /usr/local/Cellar/jo | sort -r | head -n 1)/bin/jo"
 
 alias aws_login_session='unset AWS_VAULT && aws-vault exec artem'

@@ -27,3 +27,5 @@ brew install lnav
 brew install ammonite-repl
 brew install pypy3
 brew install ripgrep
+brew install ctop
+brew install jo
