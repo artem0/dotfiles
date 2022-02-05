@@ -337,11 +337,11 @@ map gC :call Uncomment()<CR>
 set belloff=all
 
 " fzf configs
-nnoremap <leader>e :Files<CR>
+nnoremap <leader>f :Files<CR>
 nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>L :Lines<CR>
-nnoremap <leader>q :Ag<CR>
+nnoremap <leader>a :Ag<CR>
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -436,11 +436,11 @@ let g:snipMate = { 'snippet_version' : 1 }
 
 " Easymotion  3.0 ------------------------------
 " <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  <Leader>s <Plug>(easymotion-bd-f)
+nmap <Leader>s <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
+nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
 
 " Move to line
 map <Leader>l <Plug>(easymotion-bd-jk)
