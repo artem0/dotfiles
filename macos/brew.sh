@@ -29,3 +29,6 @@ brew install pypy3
 brew install ripgrep
 brew install ctop
 brew install jo
+brew install angle-grinder
+brew install pwgen
+brew install watch
