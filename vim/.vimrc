@@ -267,7 +267,7 @@ let g:jedi#goto_command ="<leader>m"
 " Find ocurrences
 let g:jedi#usages_command = "<leader>o"
 " Find assignments
-let g:jedi#goto_assignments_command = "<leader>a"
+let g:jedi#goto_assignments_command = "<leader>d"
 " Go to definition in new tab
 nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
 

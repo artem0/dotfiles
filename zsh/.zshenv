@@ -32,8 +32,9 @@ fi
 export PATH="/usr/local/Cellar/openvpn/$(ls /usr/local/Cellar/openvpn | sort -r | head -n 1)/sbin:$PATH"
 
 # import Python libs
-export PATH=$HOME/Library/Python/2.7/bin/:$PATH
-export PATH=$HOME/Library/Python/3.7/bin/:$PATH
+#export PATH=$HOME/Library/Python/2.7/bin/:$PATH
+#export PATH=$HOME/Library/Python/3.7/bin/:$PATH
+export PATH=/usr/local/lib/python3.9/site-packages/:$PATH
 
 export PATH=$PATH:$tools/protoc-3.3.0-osx-x86_64/bin
 export PATH=$PATH:$tools/jvmtop-0.8.0
