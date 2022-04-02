@@ -1,4 +1,4 @@
-plugins=(ssh-agent autojump fzf)
+plugins=(autojump fzf)
 
 source <(antibody init)
 antibody bundle < ~/.zsh/.zsh_plugins

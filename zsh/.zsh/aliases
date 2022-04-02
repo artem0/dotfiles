@@ -41,7 +41,7 @@ alias tmuxr="tmux source-file ~/.tmux.conf"
 alias v="bat"
 alias c="cd"
 
-alias reload='. ~/.zshrc'
+alias reload='exec zsh'
 
 alias e="curl ident.me"
 
