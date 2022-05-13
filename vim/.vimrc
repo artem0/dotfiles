@@ -470,3 +470,5 @@ map N  <Plug>(incsearch-nohl-N)
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
+" Show count of matches
+set shortmess-=S
