@@ -17,3 +17,6 @@ include () {[[ -f "$1" ]] && source "$1"}
 #include ~/.nix-profile/etc/profile.d/nix.sh
 include ~/.fzf.zsh
 include ~/.sdkman/bin/sdkman-init.sh
+
+# plugin autocomplete
+autoload -Uz compinit; compinit

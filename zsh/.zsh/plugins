@@ -1,4 +1,4 @@
-plugins=(autojump fzf sdk aws)
+plugins=(autojump docker fzf sdk aws kubectl)
 
 source <(antibody init)
 antibody bundle < ~/.zsh/.zsh_plugins
