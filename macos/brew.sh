@@ -33,3 +33,6 @@ brew install angle-grinder
 brew install pwgen
 brew install watch
 brew install qrcp
+brew install dive # docker image layers
+brew install trivy # docker image security scanner
+brew install kubectx
