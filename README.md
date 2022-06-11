@@ -22,13 +22,17 @@ or it should be executed from the `dotfiles` folder: `cd /foo/bar/dotfiles && st
 
 ```bash
 cd ~
-
 git clone https://github.com/artem0/dotfiles
-
 cd dotfiles
 
 stow zsh
 stow vim
+```
+
+Apply changes:
+```bash
+j dotfiles
+stow zsh -t ~/
 ```
 
 ### Setting up macOS defaults:
