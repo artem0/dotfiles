@@ -39,16 +39,23 @@ jvmtool(){
     export PATH=$PATH:$tools/jvmtop-0.8.0
 }
 
-
 # Mac OS specific check for JAVA_HOME
-
 if [ $(uname -s) = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
     export PATH=$JAVA_HOME/bin:$PATH
 fi
 
-export PATH="/usr/local/Cellar/openvpn/$(ls /usr/local/Cellar/openvpn | sort -r | head -n 1)/sbin:$PATH"
-export PATH="/usr/local/Cellar/minikube/$(ls /usr/local/Cellar/minikube | sort -r | head -n 1)/bin:$PATH"
+export_brew_package() {
+    package=$1
+    sub_path=$2
+    package_path=/usr/local/Cellar/"$package"
+    latest_version=$(ls "$package_path" | sort -r | head -n 1)
+    export PATH="$package_path/$latest_version/$sub_path:$PATH"
+}
+
+export_brew_package "openvpn" "sbin"
+export_brew_package "minikube" "bin"
+
 
 # import Python libs
 #export PATH=$HOME/Library/Python/2.7/bin/:$PATH
