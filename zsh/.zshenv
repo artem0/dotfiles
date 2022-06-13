@@ -1,8 +1,5 @@
 export LANG=en_US.UTF-8
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # folder with tools
 export tools=$HOME/tools
 
@@ -55,7 +52,6 @@ export_brew_package() {
 
 export_brew_package "openvpn" "sbin"
 export_brew_package "minikube" "bin"
-
 
 # import Python libs
 #export PATH=$HOME/Library/Python/2.7/bin/:$PATH

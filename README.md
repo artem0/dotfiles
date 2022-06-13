@@ -47,3 +47,9 @@ cd macos && ./.macos
 cd macos && ./brew.sh
 ```
 
+### Performance
+```bash
+for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
+
+zsh -i -c -x exit &> logs.txt
+```
