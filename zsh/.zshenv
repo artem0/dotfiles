@@ -7,8 +7,16 @@ export tools=$HOME/tools
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
 pythonenv() {
-    # necessary for virtual environments setup
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+    # legacy python and pyspark
+    alias python27=/usr/local/Cellar/python@2/2.7.17/bin/python2.7
+    alias bp="python27 -m bpython"
+    alias bps="PYSPARK_DRIVER_PYTHON=bpython pyspark" # $HOME/Library/Python/2.7/bin/bpython for 2.7
+    alias jupyter_pyspark="PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark"
+    alias pyfind='find . -name "*.py"'
+    alias pygrep='grep -r --color --include="*.py"'
+
+    # virtual environments setup
+    export VIRTUALENVWRAPPER_PYTHON=$(which python3)
     export WORKON_HOME=~/.virtualenvs
     [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source /usr/local/bin/virtualenvwrapper.sh
 }

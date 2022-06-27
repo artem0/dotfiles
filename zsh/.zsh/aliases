@@ -45,12 +45,8 @@ alias reload='exec zsh'
 
 alias e="curl ident.me"
 
-alias bp="python2.7 -m bpython"
-alias bps="PYSPARK_DRIVER_PYTHON=bpython pyspark" # $HOME/Library/Python/2.7/bin/bpython for 2.7
-alias jupyter_pyspark="PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark"
 
-alias pyfind='find . -name "*.py"'
-alias pygrep='grep -r --color --include="*.py"'
-alias jobj="/usr/local/Cellar/jo/$(ls /usr/local/Cellar/jo | sort -r | head -n 1)/bin/jo"
+# avoid conflict between autojump and json objects
+alias jobj="/usr/local/bin/jo"
 
 alias aws_login_session='unset AWS_VAULT && aws-vault exec artem'
