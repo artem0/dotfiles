@@ -238,7 +238,7 @@ set undodir=/tmp//
 " toggle nerdtree display
 map <leader>1 :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
-nmap <C-w> :NERDTreeFind<CR>
+nmap <leader>2  :NERDTreeFind<CR>
 " don't show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 " enable mouse

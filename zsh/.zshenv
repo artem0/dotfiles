@@ -44,6 +44,10 @@ jvmtool(){
     export PATH=$PATH:$tools/jvmtop-0.8.0
 }
 
+goenv() {
+    export PATH=$PATH:~/go/bin
+}
+
 # Mac OS specific check for JAVA_HOME
 if [ $(uname -s) = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
@@ -59,7 +63,7 @@ export_brew_package() {
 }
 
 export_brew_package "openvpn" "sbin"
-export_brew_package "minikube" "bin"
+export_brew_package "mtr" "sbin"
 
 # import Python libs
 #export PATH=$HOME/Library/Python/2.7/bin/:$PATH
@@ -76,3 +80,5 @@ bindkey '\033' edit-command-line
 # Reduce delay time after pressing ESC before opening vim mode for editing a command
 export KEYTIMEOUT=1
 
+
+rustenv
