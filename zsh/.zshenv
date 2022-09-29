@@ -9,7 +9,8 @@ export PYTHONSTARTUP="$HOME/.pythonrc"
 pythonenv() {
     # legacy python and pyspark
     alias python27=/usr/local/Cellar/python@2/2.7.17/bin/python2.7
-    alias bp="python27 -m bpython"
+    alias bp27="python27 -m bpython"
+    alias bp="python3 -m bpython"
     alias bps="PYSPARK_DRIVER_PYTHON=bpython pyspark" # $HOME/Library/Python/2.7/bin/bpython for 2.7
     alias jupyter_pyspark="PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark"
     alias pyfind='find . -name "*.py"'
@@ -63,12 +64,15 @@ export_brew_package() {
 }
 
 export_brew_package "openvpn" "sbin"
+export_brew_package "hping" "sbin"
 export_brew_package "mtr" "sbin"
+# export_brew_package "minikube" "bin"
 
-# import Python libs
+# import Python libs, maintain two versions 3.9 & 3.10, `pip3 list` & `pip3.9 list`
 #export PATH=$HOME/Library/Python/2.7/bin/:$PATH
 #export PATH=$HOME/Library/Python/3.7/bin/:$PATH
 export PATH=/usr/local/lib/python3.9/site-packages/:$PATH
+export PATH=$HOME/Library/Python/3.10/bin/:$PATH
 
 export SDKMAN_DIR="$HOME/.sdkman"
 

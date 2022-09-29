@@ -39,3 +39,4 @@ brew install kubectx
 brew install ncdu # disk utility
 brew install sslh
 brew install mtr # traceroute + ping
+brew install pywhat
