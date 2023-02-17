@@ -113,6 +113,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Git wrapper, jump from one hunk to the next in the current buffer: ]c and [c
+" preview, stage, undo hunks with <leader>hp, <leader>hs, and <leader>hu
 Plug 'airblade/vim-gitgutter'
 
 " Color schemas
@@ -266,8 +267,7 @@ let g:jedi#force_py_version = 3
 let g:jedi#goto_command ="<leader>m"
 " Find ocurrences
 let g:jedi#usages_command = "<leader>o"
-" Find assignments
-let g:jedi#goto_assignments_command = "<leader>d"
+" Find assignments let g:jedi#goto_assignments_cummand = "<leader>d"
 " Go to definition in new tab
 nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
 
@@ -319,6 +319,7 @@ nnoremap <C-A> 0
 nnoremap <C-E> $
 
 nnoremap 9 $
+
 
 set clipboard=unnamed "OSX
 
@@ -472,3 +473,6 @@ cnoremap <C-e> <End>
 
 " Show count of matches
 set shortmess-=S
+
+" Reselect pasted text 
+nnoremap rp `[v`]

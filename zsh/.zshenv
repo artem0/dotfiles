@@ -6,6 +6,23 @@ export tools=$HOME/tools
 # load python autocomplete
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
+condaenv(){
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/Users/artem/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+    else
+        if [ -f "/Users/artem/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/Users/artem/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/Users/artem/miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+}
+
 pythonenv() {
     # legacy python and pyspark
     alias python27=/usr/local/Cellar/python@2/2.7.17/bin/python2.7
@@ -49,6 +66,9 @@ goenv() {
     export PATH=$PATH:~/go/bin
 }
 
+code() {
+    open -a VSCodium $1
+}
 # Mac OS specific check for JAVA_HOME
 if [ $(uname -s) = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
@@ -63,11 +83,12 @@ export_brew_package() {
     export PATH="$package_path/$latest_version/$sub_path:$PATH"
 }
 
-export_brew_package "openvpn" "sbin"
-export_brew_package "hping" "sbin"
-export_brew_package "mtr" "sbin"
-# export_brew_package "minikube" "bin"
+#export_brew_package "openvpn" "sbin"
+#export_brew_package "hping" "sbin"
+#export_brew_package "mtr" "sbin"
+#export_brew_package "minikube" "bin"
 
+ 
 # import Python libs, maintain two versions 3.9 & 3.10, `pip3 list` & `pip3.9 list`
 #export PATH=$HOME/Library/Python/2.7/bin/:$PATH
 #export PATH=$HOME/Library/Python/3.7/bin/:$PATH
@@ -84,5 +105,3 @@ bindkey '\033' edit-command-line
 # Reduce delay time after pressing ESC before opening vim mode for editing a command
 export KEYTIMEOUT=1
 
-
-rustenv
