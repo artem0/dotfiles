@@ -61,10 +61,9 @@ Plug 'jeetsukumaran/vim-indentwise'
 " Python autocompletion, go to definition.
 Plug 'davidhalter/jedi-vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'garbas/vim-snipmate'
+
 " Automatically sort python imports
 Plug 'fisadev/vim-isort'
 " Window chooser
@@ -250,6 +249,20 @@ let g:jedi#rename_command = '<leader>R'
 " Find assignments let g:jedi#goto_assignments_cummand = "<leader>d"
 " Go to definition in new tab
 nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
+
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 1
+let g:jedi#auto_vim_configuration = 0
+
+" Snippets configs, enable UltiSnips
+"let g:UltiSnipsEnableSnipMate = 0
+"let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'vim-snippets/snippets']
+"
+" Trigger configuration
+"let g:UltiSnipsExpandTrigger = '<tab>'
+"let g:UltiSnipsJumpForwardTrigger = '<tab>'
+"let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
+
 " TabMan ------------------------------
 
 " mappings to toggle display, and to focus on it
@@ -325,7 +338,7 @@ nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>a :Ag<CR>
-nnoremap <leader>h :History:<CR>
+nnoremap <leader>hh :History:<CR>
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -340,9 +353,6 @@ function s:CompleteTags()
 endfunction
 autocmd BufRead,BufNewFile *.html,*.js,*.xml call s:CompleteTags()
 
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 1
-let g:jedi#auto_vim_configuration = 0
 
 "Cursor settings
 let &t_SI.="\e[5 q" "SI = INSERT mode
@@ -467,7 +477,19 @@ nnoremap rp `[v`]
 " MRU
 nnoremap  <leader>r :MRUToggle<CR>
 
+function! MRUClean()
+  let home_dir = expand("~")
+  let full_path = home_dir . "/" . ".vim_mru_files"
+  if filereadable(full_path)
+    call delete(full_path)
+    echo "Cleaned MRU hisotry " . full_path
+  else
+    echo "MRU history file not found: " . full_path
+  endif
+endfunction
+
+command! ClearMRU call MRUClean()
+
 " YankRing, :YRClear to clean the history
 nnoremap <leader>y :YRShow<CR>
-command! ClearMRU :! rm ~/.vim_mru_files
 
