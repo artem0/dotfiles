@@ -11,13 +11,7 @@ call pathogen#helptags()
 
 :set mouse=a
 
-" Fisa-vim-config
-" http://fisadev.github.io/fisa-vim-config/
-" version: 8.3.1
-
-" ============================================================================
 " Vim-plug initialization
-" Avoid modify this section, unless you are very sure of what you are doing
 
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
@@ -28,19 +22,15 @@ if !filereadable(vim_plug_path)
     let vim_plug_just_installed = 1
 endif
 
-" manually load vim-plug the first time
+" Manually load vim-plug the first time
 if vim_plug_just_installed
     :execute 'source '.fnameescape(vim_plug_path)
 endif
 
-" Obscure hacks done, you can now modify the rest of the .vimrc as you wish :)
+" Obscure hacks done
 
-" ============================================================================
 " Active plugins
-" You can disable or add new ones here:
-
-" this needs to be here, so vim-plug knows we are declaring the plugins we
-" want to use
+" this needs to be here, so vim-plug knows we are declaring the plugins we want to use
 call plug#begin('~/.vim/plugged')
 
 " Plugins from github repos:
@@ -62,10 +52,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fisadev/fisa-vim-colorscheme'
 " Consoles as buffers
 Plug 'rosenfeld/conque-term'
-" Pending tasks list
-Plug 'fisadev/FixedTaskList.vim'
-" Surround
-Plug 'tpope/vim-surround'
 " Autoclose
 Plug 'Townk/vim-autoclose'
 " Indent text object
@@ -132,6 +118,7 @@ Plug 'easymotion/vim-easymotion'
 
 Plug 'haya14busa/incsearch.vim'
 
+Plug 'yegappan/mru'
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
@@ -253,24 +240,16 @@ let NERDTreeShowHidden=1
 " nerdtree-syntax-highlight
 let g:NERDTreeFileExtensionHighlightFullName = 1
 
-" Tasklist ------------------------------
-
-" show pending tasks list
-map <F2> :TaskList<CR>
-
 " Jedi-vim ------------------------------
 
 " jedi is hanging w\o this line and heavily loads CPU
 let g:jedi#force_py_version = 3
-" All these mappings work only for python code:
-" Go to definition
 let g:jedi#goto_command ="<leader>m"
-" Find ocurrences
 let g:jedi#usages_command = "<leader>o"
+let g:jedi#rename_command = '<leader>R'
 " Find assignments let g:jedi#goto_assignments_cummand = "<leader>d"
 " Go to definition in new tab
 nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
-
 " TabMan ------------------------------
 
 " mappings to toggle display, and to focus on it
@@ -307,7 +286,7 @@ augroup Python
         autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 augroup END
 
-" Remapping vim beginnin/end of the line keys
+" Remapping vim beginning/end of the line keys
 
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
@@ -320,6 +299,9 @@ nnoremap <C-E> $
 
 nnoremap 9 $
 
+" Navigating in command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 set clipboard=unnamed "OSX
 
@@ -343,6 +325,7 @@ nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>a :Ag<CR>
+nnoremap <leader>h :History:<CR>
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -351,14 +334,14 @@ endif
 
 " XML/HTML autocomplete
 function s:CompleteTags()
-  inoremap <buffer> > ></<C-x><C-o><Esc>:startinsert!<CR><C-O>?</<CR>
+  inoremap <buffer> > ></<C-x><C-o><Esc>:startinsevim-snippetsrt!<CR><C-O>?</<CR>
   inoremap <buffer> ><Leader> >
   inoremap <buffer> ><CR> ></<C-x><C-o><Esc>:startinsert!<CR><C-O>?</<CR><CR><Tab><CR><Up><C-O>$
 endfunction
 autocmd BufRead,BufNewFile *.html,*.js,*.xml call s:CompleteTags()
 
 autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
 let g:jedi#auto_vim_configuration = 0
 
 "Cursor settings
@@ -417,6 +400,14 @@ command! -bang -nargs=* Ag
   \   <bang>0
   \ )
 
+" :Rg command
+command! -bang -nargs=* Rg
+   \ call fzf#vim#grep(
+   \   'rg --hidden --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>),
+   \   1,
+   \   fzf#vim#with_preview('right:50%', '?'),
+   \   <bang>0)
+
 function! ClearRegisters()
     let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-="*+'
     let i=0
@@ -467,12 +458,16 @@ let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 
-" Navigating in command mode
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-
 " Show count of matches
 set shortmess-=S
 
 " Reselect pasted text 
 nnoremap rp `[v`]
+
+" MRU
+nnoremap  <leader>r :MRUToggle<CR>
+
+" YankRing, :YRClear to clean the history
+nnoremap <leader>y :YRShow<CR>
+command! ClearMRU :! rm ~/.vim_mru_files
+
