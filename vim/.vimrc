@@ -9,8 +9,6 @@ endif
 execute pathogen#infect()
 call pathogen#helptags()
 
-:set mouse=a
-
 " Vim-plug initialization
 
 let vim_plug_just_installed = 0
@@ -29,11 +27,8 @@ endif
 
 " Obscure hacks done
 
-" Active plugins
-" this needs to be here, so vim-plug knows we are declaring the plugins we want to use
+" Activate plugins
 call plug#begin('~/.vim/plugged')
-
-" Plugins from github repos:
 
 " Override configs by directory 
 Plug 'arielrossanigo/dir-configs-override.vim'
@@ -63,7 +58,6 @@ Plug 'davidhalter/jedi-vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-
 " Automatically sort python imports
 Plug 'fisadev/vim-isort'
 " Window chooser
@@ -72,17 +66,13 @@ Plug 't9md/vim-choosewin'
 Plug'dense-analysis/ale'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
-" Ack code search (requires ack installed in the system)
-Plug 'mileszs/ack.vim'
 if has('python')
     " YAPF formatter for Python
     Plug 'pignacio/vim-yapf-format'
 endif
-" Relative numbering of lines (0 is the current line)
-" (disabled by default because is very intrusive and can't be easily toggled
-" on/off. When the plugin is present, will always activate the relative 
-" numbering every time you go to normal mode. Author refuses to add a setting 
-" to avoid that)
+
+" It always activate the relative numbering every time you go to normal mode,
+" author refuses to add a setting to avoid that
 " Plug 'myusuf3/numbers.vim'
 
 " Plugins from vim-scripts repos:
@@ -116,8 +106,8 @@ Plug 'morhetz/gruvbox'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'haya14busa/incsearch.vim'
-
 Plug 'yegappan/mru'
+Plug 'machakann/vim-highlightedyank'
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
@@ -134,7 +124,9 @@ endif
 
 " ============================================================================
 " Vim settings and mappings
-" You can edit them as you wish
+
+" mouse
+set mouse=a
 
 " no vi-compatible
 set nocompatible
@@ -239,7 +231,7 @@ let NERDTreeShowHidden=1
 " nerdtree-syntax-highlight
 let g:NERDTreeFileExtensionHighlightFullName = 1
 
-" Jedi-vim ------------------------------
+" Jedi-vim & Snippets  ------------------------------
 
 " jedi is hanging w\o this line and heavily loads CPU
 let g:jedi#force_py_version = 3
@@ -255,13 +247,13 @@ let g:jedi#completions_enabled = 1
 let g:jedi#auto_vim_configuration = 0
 
 " Snippets configs, enable UltiSnips
-"let g:UltiSnipsEnableSnipMate = 0
-"let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'vim-snippets/snippets']
-"
+let g:UltiSnipsEnableSnipMate = 0
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'vim-snippets/snippets']
+
 " Trigger configuration
-"let g:UltiSnipsExpandTrigger = '<tab>'
-"let g:UltiSnipsJumpForwardTrigger = '<tab>'
-"let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 " TabMan ------------------------------
 
@@ -327,7 +319,7 @@ map gc :call Comment()<CR>
 map gC :call Uncomment()<CR>
 
 "Make possilbe navigation with Option+Left Arrow and Option+Right Arrow
-:map f w
+map f w
 
 "Disable Vim bells sounds
 set belloff=all
@@ -352,7 +344,6 @@ function s:CompleteTags()
   inoremap <buffer> ><CR> ></<C-x><C-o><Esc>:startinsert!<CR><C-O>?</<CR><CR><Tab><CR><Up><C-O>$
 endfunction
 autocmd BufRead,BufNewFile *.html,*.js,*.xml call s:CompleteTags()
-
 
 "Cursor settings
 let &t_SI.="\e[5 q" "SI = INSERT mode
@@ -492,4 +483,7 @@ command! ClearMRU call MRUClean()
 
 " YankRing, :YRClear to clean the history
 nnoremap <leader>y :YRShow<CR>
+
+" Yanked text highlight duration
+let g:highlightedyank_highlight_duration = 60
 
