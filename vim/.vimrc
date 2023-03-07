@@ -166,16 +166,6 @@ imap <C-S-Right> <ESC>:tabn<CR>
 map <C-S-Left> :tabp<CR>
 imap <C-S-Left> <ESC>:tabp<CR>
 
-" navigate windows with meta+arrows
-map <M-Right> <c-w>l
-map <M-Left> <c-w>h
-map <M-Up> <c-w>k
-map <M-Down> <c-w>j
-imap <M-Right> <ESC><c-w>l
-imap <M-Left> <ESC><c-w>h
-imap <M-Up> <ESC><c-w>k
-imap <M-Down> <ESC><c-w>j
-
 " Comment this line to enable autocompletion preview window
 " (displays documentation related to the selected completion option)
 " Disabled by default because preview makes the window flicker
@@ -235,12 +225,11 @@ let g:NERDTreeFileExtensionHighlightFullName = 1
 
 " jedi is hanging w\o this line and heavily loads CPU
 let g:jedi#force_py_version = 3
-let g:jedi#goto_command ="<leader>m"
-let g:jedi#usages_command = "<leader>o"
+let g:jedi#goto_command ="<leader>M"
+let g:jedi#usages_command = "<leader>O"
 let g:jedi#rename_command = '<leader>R'
 " Find assignments let g:jedi#goto_assignments_cummand = "<leader>d"
-" Go to definition in new tab
-nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
+" Go to definition in new tab nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
 
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 1
@@ -331,6 +320,7 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>a :Ag<CR>
 nnoremap <leader>hh :History:<CR>
+nnoremap <leader>m :Marks<CR>
 
 " Source the vimrc file after saving it
 if has("autocmd")
