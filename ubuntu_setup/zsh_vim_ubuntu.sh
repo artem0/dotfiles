@@ -12,7 +12,6 @@ yes | sudo apt install zsh
 yes | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 yes | sudo apt-get install stow
 yes | curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
-yes | sudo apt-get install fzf
 yes | sudo apt-get install silversearcher-ag
 yes | sudo apt install autojump
 pretty_print "Necessary packages are installed, applying dotflies"
