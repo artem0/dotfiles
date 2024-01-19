@@ -83,17 +83,21 @@ export_brew_package() {
     export PATH="$package_path/$latest_version/$sub_path:$PATH"
 }
 
-#export_brew_package "openvpn" "sbin"
-#export_brew_package "hping" "sbin"
+export_brew_package "openvpn" "sbin"
 #export_brew_package "mtr" "sbin"
-#export_brew_package "minikube" "bin"
 
+
+function hashcat {
+	cd /usr/local/share/hashcat/OpenCL/
+	/usr/local/bin/hashcat $@
+	cd -
+}
  
 # import Python libs, maintain two versions 3.9 & 3.10, `pip3 list` & `pip3.9 list`
 #export PATH=$HOME/Library/Python/2.7/bin/:$PATH
 #export PATH=$HOME/Library/Python/3.7/bin/:$PATH
-export PATH=/usr/local/lib/python3.9/site-packages/:$PATH
-export PATH=$HOME/Library/Python/3.10/bin/:$PATH
+#export PATH=/usr/local/lib/python3.11/site-packages/:$PATH
+#export PATH=$HOME/Library/Python/3.10/bin/:$PATH
 
 export SDKMAN_DIR="$HOME/.sdkman"
 

@@ -319,7 +319,10 @@ nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>a :Ag<CR>
+"applied commands history
 nnoremap <leader>hh :History:<CR>
+"edited commands history
+nnoremap <leader>H :History<CR>
 nnoremap <leader>m :Marks<CR>
 
 " Source the vimrc file after saving it
