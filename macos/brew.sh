@@ -39,3 +39,5 @@ brew install kubectx
 brew install ncdu # disk utility
 brew install mtr # traceroute + ping
 brew install pywhat
+brew install lazygit
+brew install jesseduffield/lazydocker/lazydocker

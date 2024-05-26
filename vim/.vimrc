@@ -319,11 +319,12 @@ nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>a :Ag<CR>
-"applied commands history
-nnoremap <leader>hh :History:<CR>
-"edited commands history
-nnoremap <leader>H :History<CR>
 nnoremap <leader>m :Marks<CR>
+"applied commands history
+nnoremap <leader>e :History:<CR>
+"edited files history
+nnoremap <leader>r :History<CR>
+" :History/ search history 
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -459,7 +460,7 @@ set shortmess-=S
 nnoremap rp `[v`]
 
 " MRU
-nnoremap  <leader>r :MRUToggle<CR>
+nnoremap  <leader>hr :MRUToggle<CR>
 
 function! MRUClean()
   let home_dir = expand("~")

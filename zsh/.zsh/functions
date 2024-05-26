@@ -29,6 +29,12 @@ function aws_login {
     export AWS_SECRET_ACCESS_KEY=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".SecretAccessKey" | xargs)
 }
 
+function aws_logout {
+    unset AWS_SECURITY_TOKEN
+    unset AWS_SESSION_TOKEN
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+}
 realpath() (
   REALPATH="$PWD/$(basename "$1")"
   echo "$REALPATH" | perl -pe 'chomp' | tee >(pbcopy)

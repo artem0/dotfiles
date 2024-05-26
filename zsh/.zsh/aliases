@@ -50,3 +50,5 @@ alias e="curl ident.me"
 alias jobj="/usr/local/bin/jo"
 
 alias aws_login_session='unset AWS_VAULT && aws-vault exec artem'
+
+alias lg='lazygit'
