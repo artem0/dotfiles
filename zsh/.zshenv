@@ -69,6 +69,7 @@ goenv() {
 code() {
     open -a VSCodium $1
 }
+
 # Mac OS specific check for JAVA_HOME
 if [ $(uname -s) = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
@@ -97,14 +98,14 @@ function hashcat {
 #export PATH=$HOME/Library/Python/2.7/bin/:$PATH
 #export PATH=$HOME/Library/Python/3.7/bin/:$PATH
 #export PATH=/usr/local/lib/python3.11/site-packages/:$PATH
-#export PATH=$HOME/Library/Python/3.10/bin/:$PATH
+export PATH=$HOME/Library/Python/3.11/bin/:$PATH
 
 export SDKMAN_DIR="$HOME/.sdkman"
 
-# Use ESC beside '^x^e' to edit the current command line:
+# Ctrl-e  beside 'Ctrl-x-Ctrl-e' to edit the current line in vim
 autoload -U edit-command-line
 zle -N edit-command-line
-bindkey '\033' edit-command-line
+bindkey '^e' edit-command-line
 
 # Reduce delay time after pressing ESC before opening vim mode for editing a command
 export KEYTIMEOUT=1
