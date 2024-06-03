@@ -105,7 +105,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Ctrl-e  beside 'Ctrl-x-Ctrl-e' to edit the current line in vim
 autoload -U edit-command-line
 zle -N edit-command-line
-bindkey '^e' edit-command-line
+bindkey '^q' edit-command-line
 
 # Reduce delay time after pressing ESC before opening vim mode for editing a command
 export KEYTIMEOUT=1
