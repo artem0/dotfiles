@@ -41,3 +41,8 @@ brew install mtr # traceroute + ping
 brew install pywhat
 brew install lazygit
 brew install jesseduffield/lazydocker/lazydocker
+brew install fd
+brew install gping
+brew install httpie # http cli client
+brew install delta # better diff with color schema
+brew install tlrc # tldr in cli; cheatsheets - https://github.com/tldr-pages/tldr
