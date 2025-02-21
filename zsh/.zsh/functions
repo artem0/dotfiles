@@ -23,10 +23,11 @@ function extract () {
 }
 
 function aws_login {
-    unset AWS_SECURITY_TOKEN
-    unset AWS_SESSION_TOKEN
-    export AWS_ACCESS_KEY_ID=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".AccessKeyID" | xargs)  &&
-    export AWS_SECRET_ACCESS_KEY=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq ".SecretAccessKey" | xargs)
+    unset AWS_SECURITY_TOKEN AWS_SESSION_TOKEN
+    credentials=$(security find-generic-password -s "aws-vault" -w ~/Library/Keychains/aws-vault.keychain-db | jq -r '.AccessKeyID, .SecretAccessKey')
+    export AWS_ACCESS_KEY_ID=$(echo "$credentials" | sed -n '1p')
+    export AWS_SECRET_ACCESS_KEY=$(echo "$credentials" | sed -n '2p')
+    unset credentials
 }
 
 function aws_logout {
@@ -36,7 +37,37 @@ function aws_logout {
     unset AWS_SECRET_ACCESS_KEY
 }
 
-realpath() (
-  REALPATH="$PWD/$(basename "$1")"
-  echo "$REALPATH" | perl -pe 'chomp' | tee >(pbcopy)
-)
+realpath() {
+    printf '%s\n' "$PWD/${1:-.##*/}" | tee >(pbcopy)
+}
+
+export_legacy_brew_package() {
+    local package="$1"
+    local sub_path="${2:-bin}"  # Default to 'bin' if sub_path is not provided
+    local package_path="/usr/local/Cellar/$package"
+
+    # Check if the package directory exists
+    if [[ ! -d "$package_path" ]]; then
+        echo "Error: Package '$package' not found in $package_path" >&2
+        return 1
+    fi
+
+    # Get the latest version of the package
+    local latest_version
+    latest_version=$(ls -1 "$package_path" | sort -rV | head -n 1)
+
+    # Ensure a valid version exists
+    if [[ -z "$latest_version" ]]; then
+        echo "Error: No versions found for package '$package'" >&2
+        return 1
+    fi
+
+    # Construct the full path and check if it exists
+    local full_path="$package_path/$latest_version/$sub_path"
+    if [[ -d "$full_path" ]]; then
+        export PATH="$full_path:$PATH"
+        echo "Added $full_path to PATH"
+    else
+        echo "Warning: Path '$full_path' does not exist" >&2
+    fi
+}
