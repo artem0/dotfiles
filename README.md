@@ -26,7 +26,8 @@ git clone https://github.com/artem0/dotfiles
 cd dotfiles
 
 stow zsh
-stow vim
+stow vim -t ~/
+stow nvim -t ~/.config/nvim/
 ```
 
 Apply changes:

@@ -260,8 +260,8 @@ cnoremap <C-e> <End>
 
 set clipboard=unnamed "OSX
 
-autocmd FileType python set spell spelllang=en
-autocmd FileType javascript set spell spelllang=en
+" autocmd FileType python set spell spelllang=en
+" autocmd FileType javascript set spell spelllang=en
 
 " Functions for comment/uncomment code
 source ~/.vim/vcomments.vim

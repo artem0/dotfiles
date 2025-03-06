@@ -46,3 +46,4 @@ brew install httpie # http cli client
 brew install delta # better diff with color schema
 brew install tlrc # tldr in cli; cheatsheets - https://github.com/tldr-pages/tldr
 brew install zoxide # better version of autojump
+brew install pyenv # sdkman for python
