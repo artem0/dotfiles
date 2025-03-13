@@ -26,7 +26,8 @@ git clone https://github.com/artem0/dotfiles
 cd dotfiles
 
 stow zsh
-stow vim
+stow vim -t ~/
+stow nvim -t ~/.config/nvim/
 ```
 
 Apply changes:
@@ -47,9 +48,13 @@ cd macos && ./.macos
 cd macos && ./brew.sh
 ```
 
-### Performance
+### Performance tuning
 ```bash
 for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
 
 zsh -i -c -x exit &> logs.txt
 ```
+
+https://gist.github.com/elalemanyo/cb3395af64ac23df2e0c3ded8bd63b2f
+At the beginning of your .zshrc add following: `zmodload zsh/zprof`
+and at the end add: `zprof`

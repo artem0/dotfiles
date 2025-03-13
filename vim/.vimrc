@@ -54,22 +54,14 @@ Plug 'michaeljsmith/vim-indent-object'
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
 " Python autocompletion, go to definition.
-Plug 'davidhalter/jedi-vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Automatically sort python imports
-Plug 'fisadev/vim-isort'
 " Window chooser
 Plug 't9md/vim-choosewin'
 " Python and other languages code checker
 Plug'dense-analysis/ale'
 " Paint css colors with the real color
-Plug 'lilydjwg/colorizer'
-if has('python')
-    " YAPF formatter for Python
-    Plug 'pignacio/vim-yapf-format'
-endif
 
 " It always activate the relative numbering every time you go to normal mode,
 " author refuses to add a setting to avoid that
@@ -88,7 +80,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Git wrapper, jump from one hunk to the next in the current buffer: ]c and [c
-" preview, stage, undo hunks with <leader>hp, <leader>hs, and <leader>hu
+" preview, stage, undo hunks with <leader>hp, <leader>hs, and <leader>hu
 Plug 'airblade/vim-gitgutter'
 
 " Color schemas
@@ -100,9 +92,10 @@ Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 
 " <Leader><Leader>w | b - to trigger the word motion | backwards
-" <Leader><Leader>e | ge - to trigger the end of words | backwords
+" <Leader><Leader>e | ge - to trigger the end of words | backwards
 " <Leader><Leader>j | k - to trigger the lines below | backwards
 " <Leader><Leader>so - looking for an 'o'
+" https://www.barbarianmeetscoding.com/boost-your-coding-fu-with-vscode-and-vim/moving-even-faster-with-vim-sneak-and-easymotion/
 Plug 'easymotion/vim-easymotion'
 
 Plug 'haya14busa/incsearch.vim'
@@ -221,29 +214,6 @@ let NERDTreeShowHidden=1
 " nerdtree-syntax-highlight
 let g:NERDTreeFileExtensionHighlightFullName = 1
 
-" Jedi-vim & Snippets  ------------------------------
-
-" jedi is hanging w\o this line and heavily loads CPU
-let g:jedi#force_py_version = 3
-let g:jedi#goto_command ="<leader>M"
-let g:jedi#usages_command = "<leader>O"
-let g:jedi#rename_command = '<leader>R'
-" Find assignments let g:jedi#goto_assignments_cummand = "<leader>d"
-" Go to definition in new tab nmap <leader>M :tab split<CR>:call jedi#goto()<CR>
-
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 1
-let g:jedi#auto_vim_configuration = 0
-
-" Snippets configs, enable UltiSnips
-let g:UltiSnipsEnableSnipMate = 0
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'vim-snippets/snippets']
-
-" Trigger configuration
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
 " TabMan ------------------------------
 
 " mappings to toggle display, and to focus on it
@@ -271,15 +241,6 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_z = '%l:%v %p%% %L'
 let g:airline_section_y = '%{&fileencoding?&fileencoding:&encoding}'
 
-" run from the insert mode
-imap <F5> <Esc>:w<CR>:!clear;python %<CR>
-
-" run from the normal mode
-augroup Python
-    autocmd!
-        autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
-augroup END
-
 " Remapping vim beginning/end of the line keys
 
 inoremap <C-A> <Home>
@@ -299,15 +260,15 @@ cnoremap <C-e> <End>
 
 set clipboard=unnamed "OSX
 
-autocmd FileType python set spell spelllang=en omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set spell spelllang=en
+" autocmd FileType python set spell spelllang=en
+" autocmd FileType javascript set spell spelllang=en
 
 " Functions for comment/uncomment code
 source ~/.vim/vcomments.vim
 map gc :call Comment()<CR>
 map gC :call Uncomment()<CR>
 
-"Make possilbe navigation with Option+Left Arrow and Option+Right Arrow
+"Make possible navigation with Option+Left Arrow and Option+Right Arrow
 map f w
 
 "Disable Vim bells sounds
@@ -318,7 +279,7 @@ nnoremap <leader>f :Files<CR>
 nnoremap <leader>g :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>L :Lines<CR>
-nnoremap <leader>a :Ag<CR>
+nnoremap <leader>a :Rg<CR>
 nnoremap <leader>m :Marks<CR>
 "applied commands history
 nnoremap <leader>e :History:<CR>
@@ -337,6 +298,7 @@ function s:CompleteTags()
   inoremap <buffer> ><Leader> >
   inoremap <buffer> ><CR> ></<C-x><C-o><Esc>:startinsert!<CR><C-O>?</<CR><CR><Tab><CR><Up><C-O>$
 endfunction
+
 autocmd BufRead,BufNewFile *.html,*.js,*.xml call s:CompleteTags()
 
 "Cursor settings
