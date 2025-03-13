@@ -16,9 +16,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   { "junegunn/fzf", build = ":call fzf#install()" }, -- Install fzf binary
   "junegunn/fzf.vim",                                -- fzf.vim integration
-  "easymotion/vim-easymotion",                      -- EasyMotion plugin
-  { "nvim-tree/nvim-tree.lua",                      -- nvim-tree plugin
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+  "easymotion/vim-easymotion",                       -- EasyMotion plugin
+  { "nvim-tree/nvim-tree.lua",                       -- nvim-tree plugin
+  -- "nvim-tree/nvim-web-devicons" is disabled; it shows ? because of iTerm2 - https://github.com/ryanoasis/vim-devicons/issues/198#issuecomment-338769056
     config = function()
       require("nvim-tree").setup({
         view = {
@@ -27,19 +27,18 @@ require("lazy").setup({
         renderer = {
           icons = {
             show = {
-              file = false,        -- Disable file icons
-              folder = false,      -- Disable folder icons
+              file = false,         -- Disable file icons
+              folder = false,       -- Disable folder icons
               folder_arrow = false, -- Disable folder arrows
-              git = false,         -- Disable git status icons
+              git = false,          -- Disable git status icons
             },
           },
         },
       })
     end,
   },
-  "nvim-tree/nvim-web-devicons",
-  "folke/tokyonight.nvim",
-  "rebelot/kanagawa.nvim",
+  "folke/tokyonight.nvim", -- colorscheme
+  "rebelot/kanagawa.nvim", -- colorscheme
   "vim-scripts/YankRing.vim"
 })
 
@@ -58,27 +57,31 @@ vim.keymap.set("n", "<leader>e", ":History:<CR>", opts) -- Command history
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
-vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)        -- <Leader>f{char} to move to {char}
-vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f)", opts)   -- Same but overwin
+vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)               -- <Leader>f{char} to move to {char}
+vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f)", opts)          -- Same but overwin
 vim.keymap.set("n", "<leader><leader>s", "<Plug>(easymotion-overwin-f2)", opts) -- s{char}{char} to move to {char}{char}
-vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)       -- Move to line
-vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts) -- Same but overwin
-vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)        -- Move to word
-vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)   -- Same but overwin
+vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)              -- Move to line
+vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)       -- Same but overwin
+vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               -- Move to word
+vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)          -- Same but overwin
 
 -- nvim-tree mappings (migrated from NERDTree)
-vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)  -- Toggle nvim-tree display
+vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)   -- Toggle nvim-tree display
 vim.keymap.set("n", "<leader>2", ":NvimTreeFindFile<CR>", opts) -- Open nvim-tree with current file selected
 
 -- Optional: Configure fzf layout
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
 
--- Configure nvim-web-devicons (kept but not necessary without icons)
-require("nvim-web-devicons").setup({
-  default = true,
-})
-
 -- YankRing
 vim.keymap.set("n", "<leader>y", ":YRShow<CR>", { noremap = true, silent = true })
 
 vim.cmd([[colorscheme tokyonight-night]]) -- kanagawa, tokyonight-moon, tokyonight-storm
+
+-- Make possible navigation with Option+Left Arrow and Option+Right Arrow
+-- <Esc>b == Option+Left Arrow; <Esc>f == Option+Right Arrow; https://superuser.com/a/635550
+-- Normal mode
+vim.keymap.set('n', '<Esc>b', 'b', { noremap = true })
+vim.keymap.set('n', '<Esc>f', 'w', { noremap = true })
+-- Insert mode
+vim.keymap.set('i', '<Esc>b', '<C-o>b', { noremap = true })
+vim.keymap.set('i', '<Esc>f', '<C-o>w', { noremap = true })
