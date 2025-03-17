@@ -28,9 +28,13 @@ brew install angle-grinder # sql for logs
 brew install pwgen
 brew install watch
 brew install qrcp
+brew install colima # faster docker runtime than docker desktop
+brew install docker # has dependency - docker-completion
+brew install docker-compose
 brew install ctop # top for docker containers
 brew install dive # docker image layers
 brew install trivy # docker image security scanner
+brew install jesseduffield/lazydocker/lazydocker
 brew install kubectx
 brew install ncdu # disk utility
 brew install mtr # traceroute + ping
@@ -40,7 +44,6 @@ brew install git-cola
 brew install tig
 brew install git-secrets
 brew install lazygit
-brew install jesseduffield/lazydocker/lazydocker
 brew install fd
 brew install gping
 brew install httpie # http cli client
@@ -48,3 +51,4 @@ brew install delta # better diff with color schema
 brew install tlrc # tldr in cli; cheatsheets - https://github.com/tldr-pages/tldr
 brew install zoxide # better version of autojump
 brew install pyenv # sdkman for python
+brew install --cask vscodium

@@ -1,10 +1,9 @@
-plugins=(fzf sdk aws kubectl git)
-# docker disabled from plugins
-# add autojump to plugins list above to enable and init with: zinit: zinit light wting/autojump
-# check echo $fpath for enabled autocomplete
+plugins=(fzf sdk aws git docker-compose)
+# to enable autojump add it to the list above & init with: `zinit light wting/autojump`
+# check `echo $fpath` for enabled autocomplete
 
 # Load Zinit instead of Antibody; Antibody is no longer maintained
-# zsh-completions plugin enables autocomplete for aws, kubectl and so on
+# zsh-completions plugin enables autocomplete for aws, kubectl and so on; upd w/ - `zinit self-update`
 if [[ ! -f "$HOME/.zinit/bin/zinit.zsh" ]]; then
   echo "Installing Zinit..."
   mkdir -p "$HOME/.zinit"
@@ -13,7 +12,11 @@ fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 
-zinit light zsh-users/zsh-completions
+# zinit update: https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#upgrade-zinit-and-plugins
+# manully delete plugin: zinit delete zsh-users/zsh-completions && zinit cclear
+# check completions: zinit completions
+
+zinit light zsh-users/zsh-completions # completions files are here: ~/.zinit/completions/ - 100+ completions don't slow down the loading time
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab # Replace zsh's default completion selection menu with fzf
