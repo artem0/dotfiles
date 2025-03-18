@@ -23,13 +23,19 @@ autoload -Uz compinit; compinit
 
 export PATH="/opt/homebrew/bin:$PATH"
 
+# Completions
 # Explicitly load kubectl/docker completion; kubectl/docker from ohmyzsh plugins arrays create useless `k*/d*`-like aliases; zinit duplicates it in cache ~/.cache/zinit/completions/_docker
 # these commands need kubectl/docker in $PATH, so they are below homebrew $PATH import; alternatively - put $PATH modifications right at the top of the .zshrc file - https://github.com/ohmyzsh/ohmyzsh/issues/12295#issuecomment-2013498069
-if command -v kubectl >/dev/null 2>&1; then
-    source <(kubectl completion zsh)
-fi
-if command -v docker >/dev/null 2>&1; then
-    source <(docker completion zsh)
+[[ -x $(command -v kubectl) ]] && source <(kubectl completion zsh)
+[[ -x $(command -v docker) ]] && source <(docker completion zsh)
+[[ -x $(command -v fd) ]] && source <(fd --gen-completions zsh)
+
+# workaround for failed command: source <(rg --generate complete-zsh)
+if command -v rg >/dev/null 2>&1; then
+  _rg() {
+    eval "$(rg --generate complete-zsh)"
+  }
+  compdef _rg rg
 fi
 
 # the version is stored in ~/.python-version
