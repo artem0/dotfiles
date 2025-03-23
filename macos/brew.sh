@@ -52,3 +52,4 @@ brew install tlrc # tldr in cli; cheatsheets - https://github.com/tldr-pages/tld
 brew install zoxide # better version of autojump
 brew install pyenv # sdkman for python
 brew install --cask vscodium
+brew install wireguard-tools
