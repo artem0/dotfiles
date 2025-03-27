@@ -38,7 +38,11 @@ function aws_logout {
 }
 
 realpath() {
-    printf '%s\n' "$PWD/${1:-.##*/}" | tee >(pbcopy)
+    if [ $# -eq 0 ]; then
+        printf '%s\n' "$PWD" | tee >(pbcopy)
+    else
+        printf '%s\n' "$PWD/${1:-.##*/}" | tee >(pbcopy)
+    fi
 }
 
 export_legacy_brew_package() {
