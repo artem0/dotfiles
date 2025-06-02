@@ -45,3 +45,6 @@ eval "$(pyenv init -)"
 
 # flags to make alias to autojump's j - https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#flags
 eval "$(zoxide init zsh --cmd j)"
+
+# Intellij Launcher
+export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS"

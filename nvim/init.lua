@@ -38,6 +38,7 @@ require("lazy").setup({
     end,
   },
   "folke/tokyonight.nvim", -- colorscheme
+  "nickkadutskyi/jb.nvim",
   "rebelot/kanagawa.nvim", -- colorscheme
   "vim-scripts/YankRing.vim"
 })
@@ -75,7 +76,7 @@ vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
 -- YankRing
 vim.keymap.set("n", "<leader>y", ":YRShow<CR>", { noremap = true, silent = true })
 
-vim.cmd([[colorscheme tokyonight-night]]) -- kanagawa, tokyonight-moon, tokyonight-storm
+vim.cmd([[colorscheme jb]]) -- kanagawa, tokyonight-moon, tokyonight-storm
 
 -- Make possible navigation with Option+Left Arrow and Option+Right Arrow
 -- <Esc>b == Option+Left Arrow; <Esc>f == Option+Right Arrow; https://superuser.com/a/635550
