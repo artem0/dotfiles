@@ -86,3 +86,5 @@ vim.keymap.set('n', '<Esc>f', 'w', { noremap = true })
 -- Insert mode
 vim.keymap.set('i', '<Esc>b', '<C-o>b', { noremap = true })
 vim.keymap.set('i', '<Esc>f', '<C-o>w', { noremap = true })
+
+vim.opt.clipboard = "unnamedplus" -- Use default system clipboard
