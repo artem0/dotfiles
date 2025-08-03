@@ -15,9 +15,13 @@ bindkey '^[[3~' delete-char
 bindkey '^[[3;5~' delete-char
 
 # Required for Mac OS + iTerm2 - Ctrl+J - erase everything from the current cursor position to the beginning of the line
-# Commannd+Enter is used to erase the whole line, Ctrl+U does the same, If Ctrl+U is overridden to erase from the current cursor to the beginning, it breacks Command+Enter for erasing the whole line
+# Commannd+Enter is used to erase the whole line, Ctrl+U does the same, If Ctrl+U is overridden to erase from the current cursor to the beginning, it breaks Command+Enter for erasing the whole line
 # Ctrk+K erases everything from the current cursor position to the end of the line; it works fine w/o binding
 bindkey \^J backward-kill-line
+
+# Ctl+D to Delete a word after cursor. Similar to Ctl+W to delete a word before cursor; Fn+Option+Backspace does the same
+# Option+Shift+Backspace (in config it is `bindkey "^?" kill-word`) doesn't work as it breaks Backspace to erase a single char
+bindkey "^d" kill-word
 
 # themes -> https://github.com/robbyrussell/oh-my-zsh/wiki/Themes fav: (lambda, evan, crunch, eastwood, af-magic, nicoulaj),
 # "random" will pick random theme
