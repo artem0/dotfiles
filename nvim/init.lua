@@ -89,3 +89,55 @@ vim.keymap.set('i', '<Esc>f', '<C-o>w', { noremap = true })
 
 vim.opt.clipboard = "unnamedplus" -- Use default system clipboard
 vim.opt.number = true
+
+-- Auto-clear search highlighting after cursor movement
+local function auto_nohlsearch()
+  vim.on_key(function(char)
+    if vim.fn.mode() == 'n' then
+      local key = vim.fn.keytrans(char)
+      local unescape_keys = { '<CR>', '<Esc>' }
+      local search_keys = { 'n', 'N', '*', '#', '/', '?', 'gd', 'gD' }
+
+      -- Clear highlight on escape or enter
+      for _, unescape_key in ipairs(unescape_keys) do
+        if key == unescape_key then
+          vim.schedule(function() vim.cmd('nohlsearch') end)
+          return
+        end
+      end
+
+      -- Don't clear on search-related movements
+      for _, search_key in ipairs(search_keys) do
+        if key == search_key then
+          return
+        end
+      end
+
+      -- Clear on other movements
+      if key:match('^[hjklwbWBeE%$%^%%(){}%[%]GgfFtT]') then
+        vim.schedule(function() vim.cmd('nohlsearch') end)
+      end
+    end
+  end)
+end
+
+auto_nohlsearch()
+
+local opts = { noremap = true }
+
+-- C-A & C-E aliases
+-- Normal mode
+vim.keymap.set('n', '<C-A>', '0', opts)
+vim.keymap.set('n', '<C-E>', '$', opts)
+
+-- Insert mode
+vim.keymap.set('i', '<C-A>', '<Home>', opts)
+vim.keymap.set('i', '<C-E>', '<End>', opts)
+
+-- Visual/Select mode
+vim.keymap.set('x', '<C-A>', '<Home>', opts)
+vim.keymap.set('x', '<C-E>', '<End>', opts)
+
+-- Command mode
+vim.keymap.set('c', '<C-A>', '<Home>', opts)
+vim.keymap.set('c', '<C-E>', '<End>', opts)
