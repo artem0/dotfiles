@@ -54,16 +54,17 @@ vim.keymap.set("n", "<leader>b", ":Buffers<CR>", opts)  -- Open buffers
 vim.keymap.set("n", "<leader>L", ":Lines<CR>", opts)    -- Lines in buffers
 vim.keymap.set("n", "<leader>a", ":Rg<CR>", opts)       -- Ripgrep search
 vim.keymap.set("n", "<leader>m", ":Marks<CR>", opts)    -- Marks
-vim.keymap.set("n", "<leader>e", ":History:<CR>", opts) -- Command history
+vim.keymap.set("n", "<leader>q", ":History:<CR>", opts) -- Command history
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
 vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)               -- <Leader>f{char} to move to {char}
 vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f)", opts)          -- Same but overwin
 vim.keymap.set("n", "<leader><leader>s", "<Plug>(easymotion-overwin-f2)", opts) -- s{char}{char} to move to {char}{char}
-vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)              -- Move to line
+vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)              -- Move to a line
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)       -- Same but overwin
-vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               -- Move to word
+vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               -- Move to a word
+vim.keymap.set("n", "<leader>e", "<Plug>(easymotion-bd-e)", opts)               -- Move to the end of a word
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)          -- Same but overwin
 
 -- nvim-tree mappings (migrated from NERDTree)

@@ -32,8 +32,8 @@ hash -d tooling=$HOME/tools
 alias t='~tools'
 
 # random string
-alias rs='openssl rand -base64 35 | tr -d "=+/"'
-alias rp='pwgen -Bsy 32 1'
+alias rs='openssl rand -base64 35 | tr -d "=+/\n" | tee >(pbcopy) && echo'
+alias rp='pwgen -Bsy 32 1 | tr -d "\n" | tee >(pbcopy) && echo'
 
 alias tmux="TERM=screen-256color-bce tmux"
 alias tmuxr="tmux source-file ~/.tmux.conf"

@@ -55,3 +55,4 @@ brew install zoxide # better version of autojump
 brew install pyenv # sdkman for python
 brew install --cask vscodium
 brew install wireguard-tools
+brew install --cask rectangle # alternative to Spectacle

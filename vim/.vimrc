@@ -282,7 +282,7 @@ nnoremap <leader>L :Lines<CR>
 nnoremap <leader>a :Rg<CR>
 nnoremap <leader>m :Marks<CR>
 "applied commands history
-nnoremap <leader>e :History:<CR>
+nnoremap <leader>q :History:<CR> " <leader>h conflicts with gitgutter <leader>h* mapping
 "edited files history
 nnoremap <leader>r :History<CR>
 " :History/ search history 
@@ -391,13 +391,16 @@ nmap <Leader>s <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
 nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
 
-" Move to line
+" Move to a line
 map <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
 
-" Move to word
+" Move to a word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Move to the end of a word
+nmap <Leader>e <Plug>(easymotion-bd-e)
 
 " Incsearch  ------------------------------
 map /  <Plug>(incsearch-forward)
@@ -421,8 +424,8 @@ set shortmess-=S
 " Reselect pasted text 
 nnoremap rp `[v`]
 
-" MRU
-nnoremap  <leader>hr :MRUToggle<CR>
+" MRU - the same w/ <leader>r from fzf
+" nnoremap  <leader>hr :MRUToggle<CR>
 
 function! MRUClean()
   let home_dir = expand("~")

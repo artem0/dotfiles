@@ -37,13 +37,8 @@ function aws_logout {
     unset AWS_SECRET_ACCESS_KEY
 }
 
-realpath() {
-    if [ $# -eq 0 ]; then
-        printf '%s\n' "$PWD" | tee >(pbcopy)
-    else
-        printf '%s\n' "$PWD/${1:-.##*/}" | tee >(pbcopy)
-    fi
-}
+# `&& echo` adds a newline just for terminal display
+function realpath { echo -n "${PWD}${1:+/$1}" | tee >(pbcopy) && echo; }
 
 export_legacy_brew_package() {
     local package="$1"
