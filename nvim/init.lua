@@ -40,13 +40,61 @@ require("lazy").setup({
   "folke/tokyonight.nvim", -- colorscheme
   "nickkadutskyi/jb.nvim",
   "rebelot/kanagawa.nvim", -- colorscheme
-  "vim-scripts/YankRing.vim"
+  "vim-scripts/YankRing.vim",
+ {
+   "jake-stewart/multicursor.nvim",
+   branch = "1.0",
+   config = function()
+     local mc = require("multicursor-nvim")
+     mc.setup()
+
+     local set = vim.keymap.set
+     -- Add cursor above/below;
+     -- Use M-up/down because S-up/down is used for page up/down; Option+Mouse doesn't work, so keymaps are inconsistent
+     set({"n", "x"}, "<M-up>", function() mc.lineAddCursor(-1) end)
+     set({"n", "x"}, "<M-down>", function() mc.lineAddCursor(1) end)
+
+     -- Skip cursor above/below
+     set({"n", "x"}, "<leader><up>", function() mc.lineSkipCursor(-1) end)
+     set({"n", "x"}, "<leader><down>", function() mc.lineSkipCursor(1) end)
+
+    -- Add and remove cursors with shift + left click.
+     set("n", "<S-leftmouse>", mc.handleMouse)
+     set("n", "<S-leftdrag>", mc.handleMouseDrag)
+     set("n", "<S-leftrelease>", mc.handleMouseRelease)
+
+    -- Exit back to multicursors after Insert; Doesn't work with Esc
+    set("n", "<C-c>", function() mc.clearCursors() end)
+
+    -- Mappings defined in a keymap layer only apply when there are
+    -- multiple cursors. This lets you have overlapping mappings.
+     mc.addKeymapLayer(function(layerSet)
+        -- Select a different cursor as the main one.
+        layerSet({"n", "x"}, "<left>", mc.prevCursor)
+        layerSet({"n", "x"}, "<right>", mc.nextCursor)
+        -- Delete the main cursor.
+        layerSet({"n", "x"}, "<leader>x", mc.deleteCursor)
+
+        -- Exit multicursor with <C-C>
+        -- <Esc> doesn't work, another key shall be pressed to fully exit multicursor, double <Esc> is the fastest way
+        layerSet("n", "<C-c>", function()
+            if not mc.cursorsEnabled() then
+                mc.enableCursors()
+            else
+                mc.clearCursors()
+            end
+        end)
+    end)
+
+   end
+ },
+
 })
 
 -- Set leader key to comma
 vim.g.mapleader = ","
 
--- Key mappings for fzf.vim commands
+-- Key mappings for fzf.vim commands; Not added: :Maps, :Commits, :Changes, :Jumps
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files
 vim.keymap.set("n", "<leader>g", ":GFiles<CR>", opts)   -- Git files
