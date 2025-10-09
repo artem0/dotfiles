@@ -6,29 +6,11 @@
 [alias]
 	d = diff
 	s = status
-	cim = commit -m
-	ca = !git add -A && git commit
-	cam = commit -a -m
-	p = push
-	pub = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
-	a = add -A
-	pl = pull
-	co = checkout
-	f = fetch
-	r = rebase
-	rem = remote
-	b = branch
-	cism = commit -S -m
-	casm = commit -S -a -m
-	t = tag -s
-	su = submodule foreach git pull
-	G = grep
-	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
-	prev = checkout HEAD^
-	next  = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
-	rs = reset --soft HEAD~1
-	rh = reset --hard HEAD~1
 	l = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	pub = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
+	ca = !git add -A && git commit
+	cm = commit
+	co = checkout
 [github]
 	user = artem0
 [cola]
