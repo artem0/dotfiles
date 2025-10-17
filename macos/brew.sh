@@ -56,3 +56,4 @@ brew install pyenv # sdkman for python
 brew install --cask vscodium
 brew install wireguard-tools
 brew install --cask rectangle # alternative to Spectacle
+brew install icdiff # diff side by side

@@ -33,13 +33,14 @@ alias t='~tools'
 
 # random string
 alias rs='openssl rand -base64 35 | tr -d "=+/\n" | tee >(pbcopy) && echo'
-alias rp='pwgen -Bsy 32 1 | tr -d "\n" | tee >(pbcopy) && echo'
+alias rp='pwgen -Bsy 32 1 | tr -d "\n" | pbcopy'
 
 alias tmux="TERM=screen-256color-bce tmux"
 alias tmuxr="tmux source-file ~/.tmux.conf"
 
 alias v="bat"
 alias c="cd"
+alias diff_s="icdiff"
 
 alias reload='exec zsh'
 
