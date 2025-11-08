@@ -58,7 +58,7 @@ require("lazy").setup({
      set({"n", "x"}, "<leader><up>", function() mc.lineSkipCursor(-1) end)
      set({"n", "x"}, "<leader><down>", function() mc.lineSkipCursor(1) end)
 
-    -- Add and remove cursors with shift + left click.
+    -- Add and remove cursors with Shift + left click; Hold Shift + Drag - like double Fn in Intellij
      set("n", "<S-leftmouse>", mc.handleMouse)
      set("n", "<S-leftdrag>", mc.handleMouseDrag)
      set("n", "<S-leftrelease>", mc.handleMouseRelease)
@@ -88,7 +88,14 @@ require("lazy").setup({
 
    end
  },
-
+ {
+   "sphamba/smear-cursor.nvim",
+      opts = {
+        stiffness = 0.5,
+        trailing_stiffness = 0.5,
+        matrix_pixel_threshold = 0.5,
+      },
+ }
 })
 
 -- Set leader key to comma
