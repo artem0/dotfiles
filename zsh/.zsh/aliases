@@ -38,6 +38,7 @@ alias rp='pwgen -Bsy 32 1 | tr -d "\n" | pbcopy'
 alias tmux="TERM=screen-256color-bce tmux"
 alias tmuxr="tmux source-file ~/.tmux.conf"
 
+alias vi="nvim"
 alias v="bat"
 alias c="cd"
 alias diff_s="icdiff"

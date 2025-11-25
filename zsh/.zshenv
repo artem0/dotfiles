@@ -22,6 +22,9 @@ pv() {
     export WORKON_HOME=~/.virtualenvs
     # source $(which virtualenvwrapper.sh) # virtualenvwrapper.sh crashes shell
     source $(pyenv root)/versions/$(pyenv version-name)/bin/virtualenvwrapper.sh
+
+    # Created by `pipx`
+    export PATH="$PATH:~/.local/bin"
 }
 
 jsenv(){

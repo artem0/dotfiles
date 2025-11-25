@@ -19,6 +19,7 @@
 	diff = diff-so-fancy | less
 	show = diff-so-fancy | less
 [core]
+    editor = nvim
 	excludesfile = ~/.gitignore_global
 [secrets]
 	providers = git secrets --aws-provider
