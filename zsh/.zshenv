@@ -96,6 +96,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^q' edit-command-line
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # Reduce delay time after pressing ESC before opening vim mode for editing a command
 export KEYTIMEOUT=1

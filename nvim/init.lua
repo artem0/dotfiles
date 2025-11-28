@@ -37,9 +37,12 @@ require("lazy").setup({
       })
     end,
   },
-  "folke/tokyonight.nvim", -- colorscheme
+  -- colorschemes
+  "folke/tokyonight.nvim",
   "nickkadutskyi/jb.nvim",
-  "rebelot/kanagawa.nvim", -- colorscheme
+  "rebelot/kanagawa.nvim",
+  "AlexvZyl/nordic.nvim",
+  -- colorschemes
   "vim-scripts/YankRing.vim",
  {
    "jake-stewart/multicursor.nvim",
@@ -104,19 +107,20 @@ vim.g.mapleader = ","
 -- Key mappings for fzf.vim commands; Not added: :Maps, :Commits, :Changes, :Jumps
 -- A jump is recorded when you move to a different location via Search, Marks
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files
+vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files,
+-- :Files - than: Ctrl+V - vertical split, Ctrl+X - horizontal split, Ctrl+T - in a new tab
 vim.keymap.set("n", "<leader>g", ":GFiles<CR>", opts)   -- Git files
 vim.keymap.set("n", "<leader>b", ":Buffers<CR>", opts)  -- Open buffers
 vim.keymap.set("n", "<leader>L", ":Lines<CR>", opts)    -- Lines in buffers
 vim.keymap.set("n", "<leader>a", ":Rg<CR>", opts)       -- Ripgrep search
 vim.keymap.set("n", "<leader>m", ":Marks<CR>", opts)    -- Marks
-vim.keymap.set("n", "<leader>q", ":History:<CR>", opts) -- Command history
+vim.keymap.set("n", "<leader>q", ":History:<CR>", opts) -- Applied Commands history
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
 vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)               -- <Leader>f{char} to move to {char}
-vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f)", opts)          -- Same but overwin
-vim.keymap.set("n", "<leader><leader>s", "<Plug>(easymotion-overwin-f2)", opts) -- s{char}{char} to move to {char}{char}
+vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)          -- Same but overwin
+vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts) -- s{char}{char} to move to {char}{char}
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)              -- Move to a line
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)       -- Same but overwin
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               -- Move to a word
@@ -147,38 +151,8 @@ vim.keymap.set('i', '<Esc>f', '<C-o>w', { noremap = true })
 vim.opt.clipboard = "unnamedplus" -- Use default system clipboard
 vim.opt.number = true
 
--- Auto-clear search highlighting after cursor movement
-local function auto_nohlsearch()
-  vim.on_key(function(char)
-    if vim.fn.mode() == 'n' then
-      local key = vim.fn.keytrans(char)
-      local unescape_keys = { '<CR>', '<Esc>' }
-      local search_keys = { 'n', 'N', '*', '#', '/', '?', 'gd', 'gD' }
-
-      -- Clear highlight on escape or enter
-      for _, unescape_key in ipairs(unescape_keys) do
-        if key == unescape_key then
-          vim.schedule(function() vim.cmd('nohlsearch') end)
-          return
-        end
-      end
-
-      -- Don't clear on search-related movements
-      for _, search_key in ipairs(search_keys) do
-        if key == search_key then
-          return
-        end
-      end
-
-      -- Clear on other movements
-      if key:match('^[hjklwbWBeE%$%^%%(){}%[%]GgfFtT]') then
-        vim.schedule(function() vim.cmd('nohlsearch') end)
-      end
-    end
-  end)
-end
-
-auto_nohlsearch()
+-- Clear search highlighting after pressing Enter
+vim.api.nvim_set_keymap('n', '<CR>', ':nohlsearch<CR>', { noremap = true, silent = true })
 
 local opts = { noremap = true }
 
@@ -198,3 +172,26 @@ vim.keymap.set('x', '<C-E>', '<End>', opts)
 -- Command mode
 vim.keymap.set('c', '<C-A>', '<Home>', opts)
 vim.keymap.set('c', '<C-E>', '<End>', opts)
+
+-- Auto open nvim-tree when starting without a file
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function(data)
+    if vim.fn.isdirectory(data.file) == 1 or data.file == "" then
+      require("nvim-tree.api").tree.open()
+    end
+  end
+})
+
+-- Highlight yanked text
+vim.api.nvim_create_augroup('YankHighlight', {clear = true})
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = 'YankHighlight',
+  callback = function()
+    vim.highlight.on_yank({higroup = 'IncSearch', timeout = 1})
+  end,
+})
+
+-- Delete word before cursor with Option+Backspace
+vim.api.nvim_set_keymap('n', '<A-BS>', 'vb"_d', { noremap = true, silent = true })
+-- Delete word after cursor with Option+Fn+Backspace
+vim.api.nvim_set_keymap('n', '<A-d>', 'dw', { noremap = true, silent = true })
