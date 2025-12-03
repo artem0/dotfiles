@@ -108,7 +108,7 @@ vim.g.mapleader = ","
 -- A jump is recorded when you move to a different location via Search, Marks
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files,
--- :Files - than: Ctrl+V - vertical split, Ctrl+X - horizontal split, Ctrl+T - in a new tab
+-- :Files - than: Ctrl+V - vertical split (instead of :vs), Ctrl+X - horizontal split, Ctrl+T - in a new tab
 vim.keymap.set("n", "<leader>g", ":GFiles<CR>", opts)   -- Git files
 vim.keymap.set("n", "<leader>b", ":Buffers<CR>", opts)  -- Open buffers
 vim.keymap.set("n", "<leader>L", ":Lines<CR>", opts)    -- Lines in buffers

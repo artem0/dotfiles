@@ -14,6 +14,11 @@ pv() {
     # alias jupyter_pyspark="PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark"
     # alias pyfind='find . -name "*.py"'
     # alias pygrep='grep -r --color --include="*.py"'
+    # Legacy imports for Python libs, maintain two versions 3.9 & 3.10, `pip3 list` & `pip3.9 list`
+    # export PATH=$HOME/Library/Python/2.7/bin/:$PATH
+    # export PATH=$HOME/Library/Python/3.7/bin/:$PATH
+    # export PATH=/usr/local/lib/python3.11/site-packages/:$PATH
+    # export PATH=$HOME/Library/Python/3.11/bin/:$PATH
 
     alias bp="python -m bpython"
 
@@ -83,22 +88,16 @@ function hashcat {
 	/usr/local/bin/hashcat $@
 	cd -
 }
- 
-# Legacy imports for Python libs, maintain two versions 3.9 & 3.10, `pip3 list` & `pip3.9 list`
-#export PATH=$HOME/Library/Python/2.7/bin/:$PATH
-#export PATH=$HOME/Library/Python/3.7/bin/:$PATH
-#export PATH=/usr/local/lib/python3.11/site-packages/:$PATH
-#export PATH=$HOME/Library/Python/3.11/bin/:$PATH
 
 export SDKMAN_DIR="$HOME/.sdkman"
 
-# Ctrl-q beside Ctrl-x-Ctrl-e' to edit the current line in vim
+# Ctrl-q beside Ctrl-x-Ctrl-e to edit the current line in neovim
 autoload -U edit-command-line
-zle -N edit-command-line
+stty -ixon
 bindkey '^q' edit-command-line
 export EDITOR='nvim'
 export VISUAL='nvim'
 
-# Reduce delay time after pressing ESC before opening vim mode for editing a command
+# Reduce delay time after pressing ^e before opening neovim mode for editing a command
 export KEYTIMEOUT=1
 
