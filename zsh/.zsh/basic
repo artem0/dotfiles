@@ -22,6 +22,7 @@ bindkey \^J backward-kill-line
 # Ctl+D to Delete a word after cursor. Similar to Ctl+W to delete a word before cursor; Fn+Option+Backspace does the same
 # Option+Shift+Backspace (in config it is `bindkey "^?" kill-word`) doesn't work as it breaks Backspace to erase a single char
 bindkey "^d" kill-word
+bindkey "^[[3;3~" kill-word # Fn+Option+Backspace for Ghostty, trick w/ `cat` and press Fn+Option+Backspace to reveal char sequence works in Ghostty
 
 # themes -> https://github.com/robbyrussell/oh-my-zsh/wiki/Themes fav: (lambda, evan, crunch, eastwood, af-magic, nicoulaj),
 # "random" will pick random theme
