@@ -92,9 +92,13 @@ function hashcat {
 export SDKMAN_DIR="$HOME/.sdkman"
 
 # Ctrl-q beside Ctrl-x-Ctrl-e to edit the current line in neovim
+bindkey -e
 autoload -U edit-command-line
 stty -ixon
-bindkey '^q' edit-command-line
+bindkey -M emacs '^q' edit-command-line
+bindkey -M vicmd '^q' edit-command-line
+bindkey -M viins '^q' edit-command-line
+
 export EDITOR='nvim'
 export VISUAL='nvim'
 
