@@ -127,7 +127,7 @@ vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               
 vim.keymap.set("n", "<leader>e", "<Plug>(easymotion-bd-e)", opts)               -- Move to the end of a word
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)          -- Same but overwin
 
--- nvim-tree mappings (migrated from NERDTree)
+-- nvim-tree mappings (migrated from NERDTree); Move Root Up: `-` and Move Root Into Folder: `Ctrl + ]`
 vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)   -- Toggle nvim-tree display
 vim.keymap.set("n", "<leader>2", ":NvimTreeFindFile<CR>", opts) -- Open nvim-tree with current file selected
 

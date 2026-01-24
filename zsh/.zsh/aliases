@@ -39,8 +39,9 @@ alias tmux="TERM=screen-256color-bce tmux"
 alias tmuxr="tmux source-file ~/.tmux.conf"
 
 alias vi="nvim"
+alias v="nvim"
 alias vim="nvim" # replace /usr/bin/vim
-alias v="bat"
+alias b="bat"
 alias c="cd"
 alias diff_s="icdiff"
 

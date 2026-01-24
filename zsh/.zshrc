@@ -51,3 +51,4 @@ export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
 
 # Amp CLI
 export PATH="/Users/artem/.amp/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
