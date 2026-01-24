@@ -195,3 +195,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_set_keymap('n', '<A-BS>', 'vb"_d', { noremap = true, silent = true })
 -- Delete word after cursor with Option+Fn+Backspace
 vim.api.nvim_set_keymap('n', '<A-d>', 'dw', { noremap = true, silent = true })
+
+-- Fix Python exception keywords (try/except) highlight errors to use Keyword color
+vim.api.nvim_set_hl(0, "pythonException", { link = "Keyword" })
+vim.api.nvim_set_hl(0, "pythonInclude", { link = "Keyword" })
