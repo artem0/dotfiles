@@ -199,3 +199,6 @@ vim.api.nvim_set_keymap('n', '<A-d>', 'dw', { noremap = true, silent = true })
 -- Fix Python exception keywords (try/except) highlight errors to use Keyword color
 vim.api.nvim_set_hl(0, "pythonException", { link = "Keyword" })
 vim.api.nvim_set_hl(0, "pythonInclude", { link = "Keyword" })
+
+-- Map ZQ in normal mode to quit all without saving qa!
+vim.keymap.set('n', 'ZQ', ':qa!<CR>', { noremap = true, silent = true })
