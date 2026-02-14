@@ -48,6 +48,8 @@ eval "$(zoxide init zsh --cmd j)"
 
 # Intellij Launcher
 export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+# VSCodium
+export PATH="$PATH:/Applications/VSCodium.app/Contents/Resources/app/bin/"
 
 # Amp CLI
 export PATH="/Users/artem/.amp/bin:$PATH"
