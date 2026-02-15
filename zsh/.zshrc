@@ -38,6 +38,13 @@ if command -v rg >/dev/null 2>&1; then
   compdef _rg rg
 fi
 
+if command -v uv >/dev/null 2>&1; then
+  _uv() {
+    eval "$(uv generate-shell-completion zsh)"
+  }
+  compdef _uv uv
+fi
+
 # the version is stored in ~/.python-version and ~/.pyenv/version - edit this file manually, as `pyenv global <python-version>` doesn't work
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init --path)"
