@@ -151,6 +151,11 @@ vim.keymap.set('i', '<Esc>f', '<C-o>w', { noremap = true })
 vim.opt.clipboard = "unnamedplus" -- Use default system clipboard
 vim.opt.number = true
 
+-- Tab == 4 spaces
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
 -- Clear search highlighting after pressing Enter
 vim.api.nvim_set_keymap('n', '<CR>', ':nohlsearch<CR>', { noremap = true, silent = true })
 
