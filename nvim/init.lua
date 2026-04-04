@@ -21,25 +21,34 @@ require("lazy").setup({
   -- "nvim-tree/nvim-web-devicons" is disabled; it shows ? because of iTerm2 - https://github.com/ryanoasis/vim-devicons/issues/198#issuecomment-338769056
     config = function()
       require("nvim-tree").setup({
-        -- move root up: `-`, move root into dir: Enter, arrows expand/collapse dir
+      -- Left Arrow: go up a dir, Right Arrow/Enter: enter dir or open file, o - expand/collapse, r - rename, a - create
         on_attach = function(bufnr)
           local api = require("nvim-tree.api")
           api.config.mappings.default_on_attach(bufnr)
           local o = { buffer = bufnr, noremap = true, silent = true, nowait = true }
-          vim.keymap.set("n", "-",       api.tree.change_root_to_parent, o) -- go up one directory
-          vim.keymap.set("n", "<CR>", function()                            -- enter dir or edit file
+          local function open_or_enter()
             local node = api.tree.get_node_under_cursor()
             if node.type == "directory" then api.tree.change_root_to_node()
             else api.node.open.edit() end
+          end
+          vim.keymap.set("n", "<CR>", open_or_enter, o)    -- enter dir or open file
+          vim.keymap.set("n", "<Right>", open_or_enter, o) -- same
+          vim.keymap.set("n", "<Left>", function()         -- go up, focus the dir we came from
+            local current_root = require("nvim-tree.core").get_explorer().absolute_path
+            local dir_name = vim.fn.fnamemodify(current_root, ":t")
+            api.tree.change_root_to_parent()
+            vim.schedule(function()
+              api.tree.collapse_all()
+              vim.fn.search(dir_name, "w")
+            end)
           end, o)
-          vim.keymap.set("n", "<Right>", api.node.open.edit,              o) -- expand dir / open file
-          vim.keymap.set("n", "<Left>",  api.node.navigate.parent_close,  o) -- collapse dir / go to parent
         end,
         view = {
           width = 30, -- Default width of the tree
         },
         renderer = {
           highlight_git = true, -- color filenames by git status
+          add_trailing = true,  -- append `/` to directory names
           icons = {
             show = {
               file = false,         -- Disable file icons
@@ -191,6 +200,11 @@ vim.keymap.set('x', '<C-E>', '<End>', opts)
 -- Command mode
 vim.keymap.set('c', '<C-A>', '<Home>', opts)
 vim.keymap.set('c', '<C-E>', '<End>', opts)
+
+-- nvim-tree: directories in blue
+vim.api.nvim_set_hl(0, "NvimTreeFolderName",       { fg = "#6aaade" })
+vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName", { fg = "#6aaade" })
+vim.api.nvim_set_hl(0, "NvimTreeEmptyFolderName",  { fg = "#6aaade" })
 
 -- Auto open nvim-tree when starting without a file
 vim.api.nvim_create_autocmd("VimEnter", {
