@@ -25,6 +25,7 @@ require("lazy").setup({
           width = 30, -- Default width of the tree
         },
         renderer = {
+          highlight_git = true, -- color filenames by git status
           icons = {
             show = {
               file = false,         -- Disable file icons
