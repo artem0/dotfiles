@@ -21,6 +21,20 @@ require("lazy").setup({
   -- "nvim-tree/nvim-web-devicons" is disabled; it shows ? because of iTerm2 - https://github.com/ryanoasis/vim-devicons/issues/198#issuecomment-338769056
     config = function()
       require("nvim-tree").setup({
+        -- move root up: `-`, move root into dir: Enter, arrows expand/collapse dir
+        on_attach = function(bufnr)
+          local api = require("nvim-tree.api")
+          api.config.mappings.default_on_attach(bufnr)
+          local o = { buffer = bufnr, noremap = true, silent = true, nowait = true }
+          vim.keymap.set("n", "-",       api.tree.change_root_to_parent, o) -- go up one directory
+          vim.keymap.set("n", "<CR>", function()                            -- enter dir or edit file
+            local node = api.tree.get_node_under_cursor()
+            if node.type == "directory" then api.tree.change_root_to_node()
+            else api.node.open.edit() end
+          end, o)
+          vim.keymap.set("n", "<Right>", api.node.open.edit,              o) -- expand dir / open file
+          vim.keymap.set("n", "<Left>",  api.node.navigate.parent_close,  o) -- collapse dir / go to parent
+        end,
         view = {
           width = 30, -- Default width of the tree
         },
@@ -119,16 +133,15 @@ vim.keymap.set("n", "<leader>q", ":History:<CR>", opts) -- Applied Commands hist
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
-vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)               -- <Leader>f{char} to move to {char}
-vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)          -- Same but overwin
-vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts) -- s{char}{char} to move to {char}{char}
+-- vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)               -- <Leader>s{char} to move to {char}
+vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)   -- Same but overwin
+vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts)         -- s{char}{char} to move to {char}{char}
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)              -- Move to a line
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)       -- Same but overwin
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               -- Move to a word
 vim.keymap.set("n", "<leader>e", "<Plug>(easymotion-bd-e)", opts)               -- Move to the end of a word
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)          -- Same but overwin
 
--- nvim-tree mappings (migrated from NERDTree); Move Root Up: `-` and Move Root Into Folder: `Ctrl + ]`
 vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)   -- Toggle nvim-tree display
 vim.keymap.set("n", "<leader>2", ":NvimTreeFindFile<CR>", opts) -- Open nvim-tree with current file selected
 
