@@ -47,6 +47,23 @@ function realpath {
   echo "$path" | /usr/bin/tee >(/usr/bin/pbcopy)
 }
 
+toggle_fn_keys() {
+    # 0 = Media/Special keys, 1 = Standard F1-F12
+    local current_state
+    current_state=$(defaults read -g com.apple.keyboard.fnState 2>/dev/null)
+
+    if [ "$current_state" -eq 0 ]; then
+        defaults write -g com.apple.keyboard.fnState -bool true
+        echo "Mode: Intellij"
+    else
+        defaults write -g com.apple.keyboard.fnState -bool false
+        echo "Mode: Standard F1-F12 Keys"
+    fi
+
+    # Force the system to recognize the change immediately
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+}
+
 export_legacy_brew_package() {
     local package="$1"
     local package_path="/usr/local/Cellar/$package"
