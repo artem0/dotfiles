@@ -132,7 +132,7 @@ vim.g.mapleader = ","
 -- A jump is recorded when you move to a different location via Search, Marks
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files,
--- :Files - than: Ctrl+V - vertical split (instead of :vs), Ctrl+X - horizontal split, Ctrl+T - in a new tab
+-- :Files & NvimTree: Ctrl+V - vertical split (instead of :vs), Ctrl+X - horizontal split, Ctrl+T - in a new tab
 vim.keymap.set("n", "<leader>g", ":GFiles<CR>", opts)   -- Git files
 vim.keymap.set("n", "<leader>b", ":Buffers<CR>", opts)  -- Open buffers
 vim.keymap.set("n", "<leader>L", ":Lines<CR>", opts)    -- Lines in buffers
@@ -150,9 +150,6 @@ vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)       
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               -- Move to a word
 vim.keymap.set("n", "<leader>e", "<Plug>(easymotion-bd-e)", opts)               -- Move to the end of a word
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)          -- Same but overwin
-
-vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)   -- Toggle nvim-tree display
-vim.keymap.set("n", "<leader>2", ":NvimTreeFindFile<CR>", opts) -- Open nvim-tree with current file selected
 
 -- Optional: Configure fzf layout
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
@@ -200,6 +197,10 @@ vim.keymap.set('x', '<C-E>', '<End>', opts)
 -- Command mode
 vim.keymap.set('c', '<C-A>', '<Home>', opts)
 vim.keymap.set('c', '<C-E>', '<End>', opts)
+
+-- nvim-tree: keymaps
+vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)   -- Toggle nvim-tree display
+vim.keymap.set("n", "<leader>2", ":NvimTreeFindFile<CR>", opts) -- Open nvim-tree with current file selected
 
 -- nvim-tree: directories in blue
 vim.api.nvim_set_hl(0, "NvimTreeFolderName",       { fg = "#6aaade" })
