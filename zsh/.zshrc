@@ -59,5 +59,8 @@ export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
 export PATH="$PATH:/Applications/VSCodium.app/Contents/Resources/app/bin/"
 
 # Amp CLI
-export PATH="/Users/artem/.amp/bin:$PATH"
+export PATH="$HOME/.amp/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+# Bun
+export PATH="$HOME/.bun/bin:$PATH"
