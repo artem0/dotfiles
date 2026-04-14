@@ -33,6 +33,20 @@ require("lazy").setup({
           end
           vim.keymap.set("n", "<CR>", open_or_enter, o)    -- enter dir or open file
           vim.keymap.set("n", "<Right>", open_or_enter, o) -- same
+          vim.keymap.set("n", "yc", function()              -- copy file to clipboard
+            local node = api.tree.get_node_under_cursor()
+            if node and node.absolute_path then
+              if vim.fn.has("mac") == 1 then
+                vim.fn.system({
+                  "osascript", "-e",
+                  'set the clipboard to (POSIX file "' .. node.absolute_path .. '")'
+                })
+                vim.notify("Copied: " .. node.name)
+              else
+                vim.notify("yc: file copy not supported on this OS", vim.log.levels.WARN)
+              end
+            end
+          end, o)
           vim.keymap.set("n", "<Left>", function()         -- go up, focus the dir we came from
             local current_root = require("nvim-tree.core").get_explorer().absolute_path
             local dir_name = vim.fn.fnamemodify(current_root, ":t")
