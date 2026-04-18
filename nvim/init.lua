@@ -146,7 +146,8 @@ vim.g.mapleader = ","
 -- A jump is recorded when you move to a different location via Search, Marks
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files,
--- :Files & NvimTree: Ctrl+V - vertical split (instead of :vs), Ctrl+X - horizontal split, Ctrl+T - in a new tab
+-- :Files & NvimTree: Ctrl+V - vertical split (instead of :vs), Ctrl+X - horizontal split, Ctrl+T - in a new tab;
+-- :Files ../ - open dir above
 vim.keymap.set("n", "<leader>g", ":GFiles<CR>", opts)   -- Git files
 vim.keymap.set("n", "<leader>b", ":Buffers<CR>", opts)  -- Open buffers
 vim.keymap.set("n", "<leader>L", ":Lines<CR>", opts)    -- Lines in buffers
@@ -173,6 +174,8 @@ vim.keymap.set("n", "<leader>y", ":YRShow<CR>", { noremap = true, silent = true 
 
 vim.cmd([[colorscheme jb]]) -- kanagawa, tokyonight-moon, tokyonight-storm
 
+vim.opt.ttimeoutlen = 0 -- process ESC sequences immediately so Option+key combos work in popups in Command mode
+
 -- Make possible navigation with Option+Left Arrow and Option+Right Arrow
 -- <Esc>b == Option+Left Arrow; <Esc>f == Option+Right Arrow; https://superuser.com/a/635550
 -- Normal mode
@@ -181,6 +184,36 @@ vim.keymap.set('n', '<Esc>f', 'w', { noremap = true })
 -- Insert mode
 vim.keymap.set('i', '<Esc>b', '<C-o>b', { noremap = true })
 vim.keymap.set('i', '<Esc>f', '<C-o>w', { noremap = true })
+-- Same for Command mode wildmenu: slash-aware word navigation
+vim.keymap.set('c', '<Esc>b', function()
+  local line = vim.fn.getcmdline()
+  local pos = vim.fn.getcmdpos() - 1
+  while pos >= 1 and line:sub(pos, pos):match('[%s/]') do pos = pos - 1 end
+  while pos >= 1 and not line:sub(pos, pos):match('[%s/]') do pos = pos - 1 end
+  vim.fn.setcmdline(line, pos + 1)
+end, { noremap = true })
+vim.keymap.set('c', '<Esc>f', function()
+  local line = vim.fn.getcmdline()
+  local pos = vim.fn.getcmdpos()
+  while pos <= #line and not line:sub(pos, pos):match('[%s/]') do pos = pos + 1 end
+  while pos <= #line and line:sub(pos, pos):match('[%s/]') do pos = pos + 1 end
+  vim.fn.setcmdline(line, pos)
+end, { noremap = true })
+
+-- Up/Down Arrow in Command mode wildmenu: navigate list
+vim.keymap.set('c', '<Down>', '<C-N>', { noremap = true })
+vim.keymap.set('c', '<Up>', '<C-P>', { noremap = true })
+-- Right Arrow in Command mode wildmenu: commit current completion and dive into directory
+vim.keymap.set('c', '<Right>', function()
+  if vim.fn.wildmenumode() == 1 then
+    vim.schedule(function()
+      local line = vim.fn.getcmdline():gsub('%s+$', '')
+      vim.fn.setcmdline(line)
+    end)
+    return ' '  -- space commits the wildmenu selection; schedule cleans it up
+  end
+  return '<Right>'
+end, { expr = true, noremap = true })
 
 vim.opt.clipboard = "unnamedplus" -- Use default system clipboard
 vim.opt.number = true
@@ -243,6 +276,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_set_keymap('n', '<A-BS>', 'vb"_d', { noremap = true, silent = true })
 -- Delete word after cursor with Option+Fn+Backspace
 vim.api.nvim_set_keymap('n', '<A-d>', 'dw', { noremap = true, silent = true })
+-- The same in Command mode
+vim.api.nvim_set_keymap('c', '<A-BS>', '<C-W>', { noremap = true })
+vim.keymap.set('c', '<Esc>d', function()
+  local line = vim.fn.getcmdline()
+  local pos = vim.fn.getcmdpos() - 1  -- 0-indexed cursor position
+  local new_pos = pos
+  while new_pos < #line and not line:sub(new_pos + 1, new_pos + 1):match('[%s/]') do
+    new_pos = new_pos + 1
+  end
+  while new_pos < #line and line:sub(new_pos + 1, new_pos + 1):match('[%s/]') do
+    new_pos = new_pos + 1
+  end
+  vim.fn.setcmdline(line:sub(1, pos) .. line:sub(new_pos + 1), pos + 1)
+end, { noremap = true })
 
 -- Fix Python exception keywords (try/except) highlight errors to use Keyword color
 vim.api.nvim_set_hl(0, "pythonException", { link = "Keyword" })
