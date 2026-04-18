@@ -247,7 +247,9 @@ vim.keymap.set('c', '<C-E>', '<End>', opts)
 
 -- nvim-tree: keymaps
 vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)   -- Toggle nvim-tree display
-vim.keymap.set("n", "<leader>2", ":NvimTreeFindFile<CR>", opts) -- Open nvim-tree with current file selected
+vim.keymap.set("n", "<leader>2", function()
+  require("nvim-tree.api").tree.find_file({ open = true, focus = true, update_root = true })
+end, opts) -- Open nvim-tree with current file selected, updating root if needed
 
 -- nvim-tree: directories in blue
 vim.api.nvim_set_hl(0, "NvimTreeFolderName",       { fg = "#6aaade" })
