@@ -169,6 +169,14 @@ vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)          
 -- Optional: Configure fzf layout
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
 
+-- Override :Rg to include hidden files (exclude .git)
+vim.cmd([[
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case --hidden --glob "!.git" '.shellescape(<q-args>), 1,
+    \   <bang>0)
+]])
+
 -- YankRing
 vim.keymap.set("n", "<leader>y", ":YRShow<CR>", { noremap = true, silent = true })
 

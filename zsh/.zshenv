@@ -82,6 +82,7 @@ export_brew_package() {
 
 # export_brew_package "openvpn"
 # export_brew_package "mtr"
+export_brew_package "libpq"
 
 function hashcat {
 	cd /usr/local/share/hashcat/OpenCL/
