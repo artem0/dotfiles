@@ -27,6 +27,7 @@ require("lazy").setup({
           api.config.mappings.default_on_attach(bufnr)
           local o = { buffer = bufnr, noremap = true, silent = true, nowait = true }
           local function open_or_enter()
+            vim.cmd("nohlsearch") -- clear search highlight left over from "/" in the tree
             local node = api.tree.get_node_under_cursor()
             if node.type == "directory" then api.tree.change_root_to_node()
             else api.node.open.edit() end
@@ -48,6 +49,7 @@ require("lazy").setup({
             end
           end, o)
           vim.keymap.set("n", "<Left>", function()         -- go up, focus the dir we came from
+            vim.cmd("nohlsearch") -- clear search highlight left over from "/" in the tree
             local current_root = require("nvim-tree.core").get_explorer().absolute_path
             local dir_name = vim.fn.fnamemodify(current_root, ":t")
             api.tree.change_root_to_parent()
