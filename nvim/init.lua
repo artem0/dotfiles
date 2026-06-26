@@ -233,6 +233,9 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+-- Search with "/" is case insensitive by default
+vim.opt.ignorecase = true
+
 -- Clear search highlighting after pressing Enter
 vim.api.nvim_set_keymap('n', '<CR>', ':nohlsearch<CR>', { noremap = true, silent = true })
 
