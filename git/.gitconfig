@@ -1,5 +1,5 @@
 [user]
-	name = Artem Rukavytsia
+	name = artem
 	email = artem.rukavitsya@gmail.com
 [push]
 	default = current
@@ -21,6 +21,8 @@
 [core]
     editor = nvim
 	excludesfile = ~/.gitignore_global
+[merge]
+    conflictstyle = zdiff3
 [secrets]
 	providers = git secrets --aws-provider
 	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
