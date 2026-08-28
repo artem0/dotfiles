@@ -171,14 +171,15 @@ vim.keymap.set("n", "<leader>q", ":History:<CR>", opts) -- Applied Commands hist
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
--- vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)               -- <Leader>s{char} to move to {char}
-vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)   -- move to {char} overwin
-vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts)         -- s{char}{char} to move to {char}{char}
-vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)              -- Move to a line
-vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)       -- Same but overwin
-vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)               -- Move to a word
-vim.keymap.set("n", "<leader>e", "<Plug>(easymotion-bd-e)", opts)               -- Move to the end of a word
-vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)          -- Same but overwin
+-- vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)             -- <Leader>s{char} to move to {char}
+vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)    -- move to {char} overwin
+vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts)          -- s{char}{char} to move to {char}{char}
+vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)               -- Move to a line
+vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)        -- Same but overwin
+vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)                -- Move to a word
+vim.keymap.set("n", "<leader>e", "<Plug>(easymotion-bd-e)", opts)                -- Move to the end of a word
+vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-overwin-w)", opts)           -- Same but overwin
+vim.keymap.set({"n", "x", "o"}, "<leader>n", "<Plug>(easymotion-bd-n)", opts)    -- Label every match of the last / search, jump by label
 
 -- Optional: Configure fzf layout
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
