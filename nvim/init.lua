@@ -138,6 +138,18 @@ require("lazy").setup({
         trailing_stiffness = 0.5,
         matrix_pixel_threshold = 0.5,
       },
+ },
+ {
+   "f-person/git-blame.nvim",  -- inline git blame for the current line
+   event = "VeryLazy",
+   opts = {
+     enabled = false,  -- off at startup; ,i toggles it on
+     date_format = "-%d/%m/%Y",
+     message_template = "  <author> • <date> • <summary>",
+     message_when_not_committed = "  Not committed yet",
+     delay = 0,                                         -- ms before the virtual text shows up
+     virtual_text_column = nil,                         -- nil == right after the end of the line
+   },
  }
 })
 
@@ -160,7 +172,7 @@ vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
 -- vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)               -- <Leader>s{char} to move to {char}
-vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)   -- Same but overwin
+vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)   -- move to {char} overwin
 vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts)         -- s{char}{char} to move to {char}{char}
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)              -- Move to a line
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)       -- Same but overwin
@@ -181,6 +193,11 @@ vim.cmd([[
 
 -- YankRing
 vim.keymap.set("n", "<leader>y", ":YRShow<CR>", { noremap = true, silent = true })
+
+-- git-blame: <leader>i toggles the inline blame, <leader>o opens the commit in the browser
+-- (not <leader>g* — that would delay the <leader>g GFiles mapping)
+vim.keymap.set("n", "<leader>i", ":GitBlameToggle<CR>", opts)
+vim.keymap.set("n", "<leader>o", ":GitBlameOpenCommitURL<CR>", opts)
 
 vim.cmd([[colorscheme jb]]) -- kanagawa, tokyonight-moon, tokyonight-storm
 
