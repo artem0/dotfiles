@@ -1,0 +1,6 @@
+# ~/.config/herdr/config.toml
+onboarding = false
+
+[keys]
+split_vertical = 'prefix+%'
+split_horizontal = 'prefix+"'

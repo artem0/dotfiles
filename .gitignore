@@ -8,3 +8,4 @@ vim/.vim/plugged/
 vifm/.vifm/scripts/
 vifm/.vifm/vifm-help.txt
 vifm/.vifm/vifminfo
+/zsh/.zsh/zsh_git_ignored
