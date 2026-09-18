@@ -166,8 +166,8 @@ vim.keymap.set("n", "<leader>g", ":GFiles<CR>", opts)   -- Git files
 vim.keymap.set("n", "<leader>b", ":Buffers<CR>", opts)  -- Open buffers
 vim.keymap.set("n", "<leader>L", ":Lines<CR>", opts)    -- Lines in buffers
 vim.keymap.set("n", "<leader>a", ":Rg<CR>", opts)       -- Ripgrep search
-vim.keymap.set("n", "<leader>m", ":Marks<CR>", opts)    -- Marks
-vim.keymap.set("n", "<leader>q", ":History:<CR>", opts) -- Applied Commands history
+vim.keymap.set("n", "<leader>q", ":Marks<CR>", opts)    -- Marks
+vim.keymap.set("n", "<leader>h", ":History:<CR>", opts) -- Applied Commands history
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
@@ -324,9 +324,22 @@ vim.keymap.set('c', '<Esc>d', function()
   vim.fn.setcmdline(line:sub(1, pos) .. line:sub(new_pos + 1), pos + 1)
 end, { noremap = true })
 
+-- Markdown flags any "_" between word chars as markdownError (it looks like
+-- an unmatched italic marker), which renders as a typo-style squiggle on
+-- snake_case identifiers, register names, URLs, etc. Not useful for notes.
+vim.api.nvim_set_hl(0, "markdownError", { link = "Normal" })
+
 -- Fix Python exception keywords (try/except) highlight errors to use Keyword color
 vim.api.nvim_set_hl(0, "pythonException", { link = "Keyword" })
 vim.api.nvim_set_hl(0, "pythonInclude", { link = "Keyword" })
 
 -- Map ZQ in normal mode to quit all without saving qa!
 vim.keymap.set('n', 'ZQ', ':qa!<CR>', { noremap = true, silent = true })
+
+-- Make lowercase marks (m, ', `) global (uppercase) instead of buffer-local
+for c in ("abcdefghijklmnopqrstuvwxyz"):gmatch(".") do
+  local C = c:upper()
+  vim.keymap.set("n", "m" .. c, "m" .. C)
+  vim.keymap.set("n", "'" .. c, "'" .. C)
+  vim.keymap.set("n", "`" .. c, "`" .. C)
+end
