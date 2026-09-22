@@ -184,11 +184,11 @@ vim.keymap.set({"n", "x", "o"}, "<leader>n", "<Plug>(easymotion-bd-n)", opts)   
 -- Optional: Configure fzf layout
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
 
--- Override :Rg to include hidden files (exclude .git)
+-- Override :Rg to include hidden files (exclude .git); always case insensitive
 vim.cmd([[
   command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case --hidden --glob "!.git" '.shellescape(<q-args>), 1,
+    \   'rg --column --line-number --no-heading --color=always --ignore-case --hidden --glob "!.git" '.shellescape(<q-args>), 1,
     \   <bang>0)
 ]])
 
@@ -286,15 +286,6 @@ end, opts) -- Open nvim-tree with current file selected, updating root if needed
 vim.api.nvim_set_hl(0, "NvimTreeFolderName",       { fg = "#6aaade" })
 vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName", { fg = "#6aaade" })
 vim.api.nvim_set_hl(0, "NvimTreeEmptyFolderName",  { fg = "#6aaade" })
-
--- Auto open nvim-tree when starting without a file
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function(data)
-    if vim.fn.isdirectory(data.file) == 1 or data.file == "" then
-      require("nvim-tree.api").tree.open()
-    end
-  end
-})
 
 -- Highlight yanked text
 vim.api.nvim_create_augroup('YankHighlight', {clear = true})
