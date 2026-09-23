@@ -185,10 +185,15 @@ vim.keymap.set({"n", "x", "o"}, "<leader>n", "<Plug>(easymotion-bd-n)", opts)   
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
 
 -- Override :Rg to include hidden files (exclude .git); always case insensitive
+-- fzf's second-stage filter matches/sorts on the match text only (--nth 4.. skips file:line:col),
+-- uses exact substring matching (--exact) instead of loose fuzzy matching, favors matches that
+-- start earliest and are shortest (--tiebreak), and starts pre-filtered with the search term
+-- so the best/exact matches are grouped at the top instead of raw ripgrep file order.
 vim.cmd([[
   command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --ignore-case --hidden --glob "!.git" '.shellescape(<q-args>), 1,
+    \   'rg --column --line-number --no-heading --color=always --ignore-case --hidden --glob "!.git" '.shellescape(<q-args>),
+    \   {'options': ['--delimiter', ':', '--nth', '4..', '--exact', '--tiebreak=begin,length', '--query', <q-args>]},
     \   <bang>0)
 ]])
 
