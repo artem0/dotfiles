@@ -150,7 +150,45 @@ require("lazy").setup({
      delay = 0,                                         -- ms before the virtual text shows up
      virtual_text_column = nil,                         -- nil == right after the end of the line
    },
- }
+ },
+ {
+   "nvim-treesitter/nvim-treesitter",
+   branch = "master",
+   build = ":TSUpdate",
+   dependencies = {
+     { "nvim-treesitter/nvim-treesitter-textobjects", branch = "master" },
+   },
+   config = function()
+     require("nvim-treesitter.configs").setup({
+       ensure_installed = {
+         "lua", "vim", "vimdoc", "bash", "python", "javascript", "typescript",
+         "json", "yaml", "markdown", "markdown_inline", "query", "java", "scala",
+       },
+       auto_install = true,
+       highlight = { enable = true },
+       indent = { enable = true },
+       textobjects = {
+         select = {
+           enable = true,
+           lookahead = true,
+           keymaps = {
+             ["af"] = "@function.outer", ["if"] = "@function.inner",
+             ["ac"] = "@class.outer",    ["ic"] = "@class.inner",
+             ["aa"] = "@parameter.outer", ["ia"] = "@parameter.inner",
+           },
+         },
+         move = {
+           enable = true,
+           set_jumps = true,
+           goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+           goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+         },
+       },
+     })
+
+     vim.treesitter.language.register("bash", "zsh")
+   end,
+ },
 })
 
 -- Set leader key to comma
@@ -328,6 +366,10 @@ vim.api.nvim_set_hl(0, "markdownError", { link = "Normal" })
 -- Fix Python exception keywords (try/except) highlight errors to use Keyword color
 vim.api.nvim_set_hl(0, "pythonException", { link = "Keyword" })
 vim.api.nvim_set_hl(0, "pythonInclude", { link = "Keyword" })
+
+-- Files under a .zsh/ dir (aliases, functions, ssh-tint, etc.) have no extension
+-- or shebang to detect from, so they'd otherwise get no filetype/highlighting
+vim.filetype.add({ pattern = { [".*/%.zsh/.*"] = "zsh" } })
 
 -- Map ZQ in normal mode to quit all without saving qa!
 vim.keymap.set('n', 'ZQ', ':qa!<CR>', { noremap = true, silent = true })
