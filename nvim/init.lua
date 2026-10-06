@@ -163,6 +163,7 @@ require("lazy").setup({
        ensure_installed = {
          "lua", "vim", "vimdoc", "bash", "python", "javascript", "typescript",
          "json", "yaml", "markdown", "markdown_inline", "query", "java", "scala",
+         "sql", "cpp", "kotlin",
        },
        auto_install = true,
        highlight = { enable = true },
@@ -187,6 +188,9 @@ require("lazy").setup({
      })
 
      vim.treesitter.language.register("bash", "zsh")
+     -- ```shell / ```console fences in markdown: no parser is named "shell"
+     vim.treesitter.language.register("bash", "shell")
+     vim.treesitter.language.register("bash", "console")
    end,
  },
 })
@@ -231,7 +235,7 @@ vim.cmd([[
   command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --ignore-case --hidden --glob "!.git" '.shellescape(<q-args>),
-    \   {'options': ['--delimiter', ':', '--nth', '4..', '--exact', '--tiebreak=begin,length', '--query', <q-args>]},
+    \   {'options': ['--delimiter', ':', '--nth', '4..', '--exact', '--tiebreak=begin,length', '--cycle','--query', <q-args>]},
     \   <bang>0)
 ]])
 
