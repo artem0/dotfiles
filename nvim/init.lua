@@ -214,8 +214,8 @@ vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
 -- vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)             -- <Leader>s{char} to move to {char}
-vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f)", opts)    -- move to {char} overwin
-vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts)          -- s{char}{char} to move to {char}{char}
+vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-overwin-f2)", opts)          -- move to {char}{char} overwin
+vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-sn)", opts)           -- search a string, jump by label to on-screen matches
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-bd-jk)", opts)               -- Move to a line
 vim.keymap.set("n", "<leader>l", "<Plug>(easymotion-overwin-line)", opts)        -- Same but overwin
 vim.keymap.set("n", "<leader>w", "<Plug>(easymotion-bd-w)", opts)                -- Move to a word
