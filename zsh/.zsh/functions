@@ -99,3 +99,14 @@ export_legacy_brew_package() {
         echo "Warning: Neither '${bin_path}' nor '${sbin_path}' exists" >&2
     fi
 }
+
+# enable/disable the background tint for ssh sessions
+toggle_ssh_tint() {
+    if (( $+functions[ssh] )); then
+        unfunction ssh _ssh_tint
+        echo "ssh tint disabled"
+    else
+        source ~/.zsh/ssh_tint/ssh-tint
+        echo "ssh tint enabled"
+    fi
+}
