@@ -110,3 +110,18 @@ toggle_ssh_tint() {
         echo "ssh tint enabled"
     fi
 }
+
+# enable/disable Night Shift (macOS): night_shift on | off
+night_shift() {
+    local state
+    case $1 in
+        on)  state=true ;;
+        off) state=false ;;
+        *)   echo "usage: night_shift on|off" >&2; return 1 ;;
+    esac
+    osascript -l JavaScript >/dev/null <<EOF2
+ObjC.import('Foundation');
+$.NSBundle.bundleWithPath('/System/Library/PrivateFrameworks/CoreBrightness.framework').load;
+$.NSClassFromString('CBBlueLightClient').alloc.init.setEnabled($state);
+EOF2
+}
