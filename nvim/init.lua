@@ -60,7 +60,7 @@ require("lazy").setup({
           end, o)
         end,
         view = {
-          width = 30, -- Default width of the tree
+          width = function() return vim.g.nvim_tree_width or 30 end, -- Last used width, 30 by default
         },
         renderer = {
           highlight_git = true, -- color filenames by git status
@@ -328,6 +328,18 @@ vim.keymap.set("n", "<leader>1", ":NvimTreeToggle<CR>", opts)   -- Toggle nvim-t
 vim.keymap.set("n", "<leader>2", function()
   require("nvim-tree.api").tree.find_file({ open = true, focus = true, update_root = true })
 end, opts) -- Open nvim-tree with current file selected, updating root if needed
+
+-- nvim-tree: remember the width after manual resize, so it survives close/reopen
+vim.api.nvim_create_autocmd("WinResized", {
+  callback = function()
+    for _, win in ipairs(vim.v.event.windows or {}) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      if vim.bo[buf].filetype == "NvimTree" then
+        vim.g.nvim_tree_width = vim.api.nvim_win_get_width(win)
+      end
+    end
+  end,
+})
 
 -- nvim-tree: directories in blue
 vim.api.nvim_set_hl(0, "NvimTreeFolderName",       { fg = "#6aaade" })

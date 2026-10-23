@@ -15,7 +15,7 @@ brew install shellcheck
 brew install macvim # jedi doesn't work without it ¯\_(ツ)_/¯
 brew install --cask iterm2
 brew install --cask dozer # no longer available, hiddenbar does the same
-brew install --cask hiddenbar
+brew install --cask hiddenbar # sidebar
 brew install --cask aws-vault
 brew install gron
 brew install gh
