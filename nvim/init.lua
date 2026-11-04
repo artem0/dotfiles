@@ -255,10 +255,10 @@ vim.opt.ttimeoutlen = 0 -- process ESC sequences immediately so Option+key combo
 -- <Esc>b == Option+Left Arrow; <Esc>f == Option+Right Arrow; https://superuser.com/a/635550
 -- Normal mode
 vim.keymap.set('n', '<Esc>b', 'b', { noremap = true })
-vim.keymap.set('n', '<Esc>f', 'w', { noremap = true })
+vim.keymap.set('n', '<Esc>f', 'e', { noremap = true })
 -- Insert mode
 vim.keymap.set('i', '<Esc>b', '<C-o>b', { noremap = true })
-vim.keymap.set('i', '<Esc>f', '<C-o>w', { noremap = true })
+vim.keymap.set('i', '<Esc>f', '<C-o>e<C-o>a', { noremap = true })
 -- Same for Command mode wildmenu: slash-aware word navigation
 vim.keymap.set('c', '<Esc>b', function()
   local line = vim.fn.getcmdline()
