@@ -10,7 +10,9 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate # en
 
 # not required on Mac OS
 bindkey "\e\eOD" backward-word
-bindkey "\e\eOC" forward-word
+bindkey "\e\eOC" emacs-forward-word # Option+Right jumps to the end of the current word (not the start of the next one)
+bindkey "^[f" emacs-forward-word      # Option+Right as sent by Ghostty/Terminal.app (ESC f)
+bindkey "^[[1;3C" emacs-forward-word  # Option+Right as sent by xterm-style terminals
 bindkey '^[[3~' delete-char
 bindkey '^[[3;5~' delete-char
 
