@@ -26,10 +26,16 @@ require("lazy").setup({
           local api = require("nvim-tree.api")
           api.config.mappings.default_on_attach(bufnr)
           local o = { buffer = bufnr, noremap = true, silent = true, nowait = true }
+          local last_selected = {} -- dir path -> child path selected when we left that dir
           local function open_or_enter()
             vim.cmd("nohlsearch") -- clear search highlight left over from "/" in the tree
             local node = api.tree.get_node_under_cursor()
-            if node.type == "directory" then api.tree.change_root_to_node()
+            if node.type == "directory" then
+              local remembered = last_selected[node.absolute_path]
+              api.tree.change_root_to_node()
+              if remembered then -- restore selection from before we went up
+                vim.schedule(function() api.tree.find_file({ buf = remembered, open = false, focus = true }) end)
+              end
             else api.node.open.edit() end
           end
           vim.keymap.set("n", "<CR>", open_or_enter, o)    -- enter dir or open file
@@ -51,6 +57,10 @@ require("lazy").setup({
           vim.keymap.set("n", "<Left>", function()         -- go up, focus the dir we came from
             vim.cmd("nohlsearch") -- clear search highlight left over from "/" in the tree
             local current_root = require("nvim-tree.core").get_explorer().absolute_path
+            local cur = api.tree.get_node_under_cursor()
+            if cur and cur.absolute_path and cur.absolute_path ~= current_root then
+              last_selected[current_root] = cur.absolute_path
+            end
             local dir_name = vim.fn.fnamemodify(current_root, ":t")
             api.tree.change_root_to_parent()
             vim.schedule(function()
