@@ -250,7 +250,38 @@ vim.cmd([[
 ]])
 
 -- YankRing
-vim.keymap.set("n", "<leader>y", ":YRShow<CR>", { noremap = true, silent = true })
+local yr_sel -- visual selection to replace; nil when the ring was opened from normal mode
+vim.keymap.set("n", "<leader>y", function()
+  yr_sel = nil
+  vim.cmd("YRShow")
+end, { noremap = true, silent = true })
+
+-- Visual mode: open the ring, <CR>/p/double-click on an entry replaces the selection with it.
+-- YankRing's own window only pastes in normal mode, so paste, undo, then re-apply as a visual P.
+local function yr_replace()
+  local elem = vim.api.nvim_get_current_line():match("^%s*(%d+)")
+  if not elem then return end
+  local sel = yr_sel
+  local ybuf = vim.api.nvim_get_current_buf()
+  vim.cmd("wincmd p")
+  vim.cmd("YRGetElem " .. elem)
+  if sel then
+    vim.cmd("silent! normal! u")
+    vim.fn.setpos("'<", sel.s)
+    vim.fn.setpos("'>", sel.e)
+    vim.cmd("normal! gvP")
+  end
+  pcall(vim.cmd, "bdelete " .. ybuf)
+end
+
+vim.keymap.set("x", "<leader>y", function()
+  vim.cmd("normal! \27") -- leave visual mode, sets '< and '>
+  yr_sel = { s = vim.fn.getpos("'<"), e = vim.fn.getpos("'>") }
+  vim.cmd("YRShow")
+  for _, key in ipairs({ "<CR>", "p", "<2-LeftMouse>" }) do
+    vim.keymap.set("n", key, yr_replace, { buffer = true, silent = true })
+  end
+end, { noremap = true, silent = true })
 
 -- git-blame: <leader>i toggles the inline blame, <leader>o opens the commit in the browser
 -- (not <leader>g* — that would delay the <leader>g GFiles mapping)
