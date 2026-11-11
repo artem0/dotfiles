@@ -223,6 +223,7 @@ vim.keymap.set("n", "<leader>h", ":History:<CR>", opts) -- Applied Commands hist
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
 
 -- EasyMotion mappings
+vim.g.EasyMotion_smartcase = 1  -- lowercase target matches both cases; uppercase matches only uppercase
 -- vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-bd-f)", opts)             -- <Leader>s{char} to move to {char}
 vim.keymap.set("n", "<leader><leader>", "<Plug>(easymotion-overwin-f2)", opts)          -- move to {char}{char} overwin
 vim.keymap.set("n", "<leader>s", "<Plug>(easymotion-sn)", opts)           -- search a string, jump by label to on-screen matches
