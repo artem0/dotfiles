@@ -421,6 +421,17 @@ end, { noremap = true })
 -- snake_case identifiers, register names, URLs, etc. Not useful for notes.
 vim.api.nvim_set_hl(0, "markdownError", { link = "Normal" })
 
+-- Markdown: fold sections under # / ## / ### heading
+-- za toggles fold under cursor; ]z / [z jump to start/end of current section.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.foldmethod = "expr"
+    vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.opt_local.foldlevel = 99
+  end,
+})
+
 -- Fix Python exception keywords (try/except) highlight errors to use Keyword color
 vim.api.nvim_set_hl(0, "pythonException", { link = "Keyword" })
 vim.api.nvim_set_hl(0, "pythonInclude", { link = "Keyword" })
