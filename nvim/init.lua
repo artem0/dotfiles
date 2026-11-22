@@ -421,6 +421,12 @@ end, { noremap = true })
 -- snake_case identifiers, register names, URLs, etc. Not useful for notes.
 vim.api.nvim_set_hl(0, "markdownError", { link = "Normal" })
 
+-- Markdown: plain text color inside ``` fenced blocks (fences without a
+-- language get no injection, so the whole block was painted string-green).
+-- Inline `code` spans keep their green (@markup.raw.markdown_inline).
+vim.api.nvim_set_hl(0, "@markup.raw.block.markdown", { link = "Normal" })
+vim.api.nvim_set_hl(0, "markdownCodeBlock", { link = "Normal" })
+
 -- Markdown: fold sections under # / ## / ### heading
 -- za toggles fold under cursor; ]z / [z jump to start/end of current section.
 vim.api.nvim_create_autocmd("FileType", {
