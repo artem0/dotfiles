@@ -72,6 +72,9 @@ require("lazy").setup({
         view = {
           width = function() return vim.g.nvim_tree_width or 30 end, -- Last used width, 30 by default
         },
+        filters = {
+          git_ignored = false, -- show git-ignored files (tinted yellow, like IntelliJ); `I` toggles them
+        },
         renderer = {
           highlight_git = true, -- color filenames by git status
           add_trailing = true,  -- append `/` to directory names
@@ -387,6 +390,78 @@ vim.api.nvim_create_autocmd("WinResized", {
 vim.api.nvim_set_hl(0, "NvimTreeFolderName",       { fg = "#6aaade" })
 vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName", { fg = "#6aaade" })
 vim.api.nvim_set_hl(0, "NvimTreeEmptyFolderName",  { fg = "#6aaade" })
+
+-- Git-ignored files tinted olive-yellow, like IntelliJ (Darcula "Ignored" file status color):
+-- in nvim-tree, in the statusline file name and in the tabline
+local git_ignored_fg = "#848504"
+local function set_git_ignored_hl()
+  vim.api.nvim_set_hl(0, "NvimTreeGitFileIgnoredHL",   { fg = git_ignored_fg })
+  vim.api.nvim_set_hl(0, "NvimTreeGitFolderIgnoredHL", { fg = git_ignored_fg })
+  -- statusline/tabline groups keep the bar's background, only the text color changes
+  for group, base in pairs({
+    GitIgnoredStatusLine   = "StatusLine",
+    GitIgnoredStatusLineNC = "StatusLineNC",
+    GitIgnoredTabLine      = "TabLine",
+    GitIgnoredTabLineSel   = "TabLineSel",
+  }) do
+    local hl = vim.api.nvim_get_hl(0, { name = base, link = false })
+    vim.api.nvim_set_hl(0, group, { fg = git_ignored_fg, bg = hl.bg, ctermbg = hl.ctermbg })
+  end
+end
+set_git_ignored_hl()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_git_ignored_hl })
+
+-- vim.b.git_ignored: true when the buffer's file is ignored by git (checked async, refreshed on enter/write)
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "BufFilePost" }, {
+  callback = function(args)
+    local buf = args.buf
+    local path = vim.api.nvim_buf_get_name(buf)
+    if vim.bo[buf].buftype ~= "" or path == "" then return end
+    vim.system({ "git", "check-ignore", "-q", path }, { cwd = vim.fn.fnamemodify(path, ":h") }, function(res)
+      vim.schedule(function()
+        if not vim.api.nvim_buf_is_valid(buf) then return end
+        local ignored = res.code == 0 -- 1: not ignored, 128: not a repo / dir missing
+        if vim.b[buf].git_ignored ~= ignored then
+          vim.b[buf].git_ignored = ignored
+          vim.cmd("redrawstatus! | redrawtabline")
+        end
+      end)
+    end)
+  end,
+})
+
+-- Statusline: the built-in default (with ruler), file name tinted when git-ignored
+function _G.statusline_filename()
+  local win = vim.g.statusline_winid or vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_win_get_buf(win)
+  if not vim.b[buf].git_ignored then return "%f" end
+  local hl = win == vim.api.nvim_get_current_win() and "GitIgnoredStatusLine" or "GitIgnoredStatusLineNC"
+  return "%#" .. hl .. "#%f%*"
+end
+vim.opt.statusline = "%<%{%v:lua.statusline_filename()%} %h%w%m%r%=%-14.(%l,%c%V%) %P"
+
+-- Tabline: like the built-in one (window count, modified flag, file name), tinted when git-ignored
+function _G.tabline()
+  local s = ""
+  local current = vim.api.nvim_get_current_tabpage()
+  for i, tab in ipairs(vim.api.nvim_list_tabpages()) do
+    local sel = tab == current
+    local win = vim.api.nvim_tabpage_get_win(tab)
+    local buf = vim.api.nvim_win_get_buf(win)
+    local name = vim.api.nvim_buf_get_name(buf)
+    name = name == "" and "[No Name]" or vim.fn.pathshorten(vim.fn.fnamemodify(name, ":~:."))
+    local nwins = #vim.tbl_filter(function(w)
+      return vim.api.nvim_win_get_config(w).relative == ""
+    end, vim.api.nvim_tabpage_list_wins(tab))
+    local flags = (nwins > 1 and nwins or "") .. (vim.bo[buf].modified and "+" or "")
+    local base = sel and "TabLineSel" or "TabLine"
+    local name_hl = vim.b[buf].git_ignored and ("GitIgnored" .. base) or base
+    s = s .. "%" .. i .. "T%#" .. base .. "# " .. (flags ~= "" and flags .. " " or "")
+      .. "%#" .. name_hl .. "#" .. name .. "%#" .. base .. "# "
+  end
+  return s .. "%#TabLineFill#%T"
+end
+vim.opt.tabline = "%!v:lua.tabline()"
 
 -- Highlight yanked text
 vim.api.nvim_create_augroup('YankHighlight', {clear = true})
