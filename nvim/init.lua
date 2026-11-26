@@ -211,7 +211,7 @@ require("lazy").setup({
 -- Set leader key to comma
 vim.g.mapleader = ","
 
--- Key mappings for fzf.vim commands; Not added: :Maps, :Commits, :Changes, :Jumps
+-- Key mappings for fzf.vim commands; Not added: :Commits, :Changes, :Jumps
 -- A jump is recorded when you move to a different location via Search, Marks
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files,
@@ -224,6 +224,7 @@ vim.keymap.set("n", "<leader>a", ":Rg<CR>", opts)       -- Ripgrep search
 vim.keymap.set("n", "<leader>q", ":Marks<CR>", opts)    -- Marks
 vim.keymap.set("n", "<leader>h", ":History:<CR>", opts) -- Applied Commands history
 vim.keymap.set("n", "<leader>r", ":History<CR>", opts)  -- File edit history
+vim.keymap.set("n", "<leader>m", ":Maps<CR>", opts)     -- Normal-mode key mappings
 
 -- EasyMotion mappings
 vim.g.EasyMotion_smartcase = 1  -- lowercase target matches both cases; uppercase matches only uppercase
