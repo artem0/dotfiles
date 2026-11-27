@@ -217,7 +217,6 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>f", ":Files<CR>", opts)    -- All files,
 -- :Files & NvimTree: Ctrl+V - vertical split (instead of :vs), Ctrl+X - horizontal split, Ctrl+T - in a new tab;
 -- :Files ../ - open dir above
-vim.keymap.set("n", "<leader>g", ":GFiles<CR>", opts)   -- Git files
 vim.keymap.set("n", "<leader>b", ":Buffers<CR>", opts)  -- Open buffers
 vim.keymap.set("n", "<leader>L", ":Lines<CR>", opts)    -- Lines in buffers
 vim.keymap.set("n", "<leader>a", ":Rg<CR>", opts)       -- Ripgrep search
@@ -288,9 +287,8 @@ vim.keymap.set("x", "<leader>y", function()
   end
 end, { noremap = true, silent = true })
 
--- git-blame: <leader>i toggles the inline blame, <leader>o opens the commit in the browser
--- (not <leader>g* — that would delay the <leader>g GFiles mapping)
-vim.keymap.set("n", "<leader>i", ":GitBlameToggle<CR>", opts)
+-- git-blame: <leader>g toggles the inline blame, <leader>o opens the commit in the browser
+vim.keymap.set("n", "<leader>g", ":GitBlameToggle<CR>", opts)
 vim.keymap.set("n", "<leader>o", ":GitBlameOpenCommitURL<CR>", opts)
 
 vim.cmd([[colorscheme jb]]) -- kanagawa, tokyonight-moon, tokyonight-storm
@@ -504,13 +502,33 @@ vim.api.nvim_set_hl(0, "@markup.raw.block.markdown", { link = "Normal" })
 vim.api.nvim_set_hl(0, "markdownCodeBlock", { link = "Normal" })
 
 -- Markdown: fold sections under # / ## / ### heading
--- za toggles fold under cursor; ]z / [z jump to start/end of current section.
+-- za toggles fold under cursor; zc toggles the enclosing # / ## / ### section;
+-- [z / ]z jump to start/end of current fold.
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
     vim.opt_local.foldmethod = "expr"
     vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.opt_local.foldlevel = 99
+    vim.keymap.set("n", "zc", function()
+      -- Walk up the treesitter tree to the nearest section headed by # / ## / ###
+      -- (#### and deeper sections are skipped, so their parent ### folds instead)
+      local node = vim.treesitter.get_node()
+      while node do
+        if node:type() == "section" then
+          local marker = node:child(0) and node:child(0):child(0)
+          if marker and marker:type():match("^atx_h[123]_marker$") then break end
+        end
+        node = node:parent()
+      end
+      if not node then return end
+      local lnum = node:start() + 1  -- heading line; its innermost fold is the section
+      if vim.fn.foldclosed(lnum) ~= -1 then
+        vim.cmd(lnum .. "foldopen")
+      else
+        vim.cmd(lnum .. "foldclose")
+      end
+    end, { buffer = true, desc = "Toggle enclosing # / ## / ### section fold" })
   end,
 })
 
